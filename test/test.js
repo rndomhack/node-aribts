@@ -19,8 +19,16 @@ tsStream.on("data", data => {
     if (++count % 100000 === 0) console.log(count, loadSize / fileSize * 100);
 });
 
-tsStream.on("drop", (pid, data) => {
-    console.log("drop", pid, data);
+tsStream.on("info", data => {
+    console.log("info", data);
+});
+
+tsStream.on("drop", pid => {
+    console.log("drop", pid);
+});
+
+tsStream.on("scrambling", pid => {
+    console.log("scrambling", pid);
 });
 
 tsStream.on("pat", (pid, data) => {
@@ -30,18 +38,6 @@ tsStream.on("pat", (pid, data) => {
 tsStream.on("pmt", (pid, data) => {
     //console.log("pmt", pid, data);
 });
-
-/*
-tsStream.on("packet", packet => {
-    loadSize += packet.raw.length;
-    if (packet.PID === 0x140 && packet.adaptation_field_control >> 1 === 1) {
-        //console.log(packet);
-    }
-    if (++count % 100000 === 0) {
-        console.log(count, loadSize / fileSize * 100);
-    }
-});
-*/
 
 tsStream.on("end", () => {
     console.log(count, loadSize / fileSize * 100);
