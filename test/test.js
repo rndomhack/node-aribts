@@ -4,7 +4,7 @@ const fs = require("fs");
 const TsStream = require("../lib/stream");
 
 const readStream = fs.createReadStream(process.argv[2]);
-const tsStream = new TsStream({});
+const tsStream = new TsStream();
 
 var fileSize = fs.statSync(process.argv[2]).size;
 var loadSize = 0;
@@ -17,6 +17,18 @@ readStream.pipe(tsStream);
 tsStream.on("data", data => {
     loadSize += data.length;
     if (++count % 100000 === 0) console.log(count, loadSize / fileSize * 100);
+});
+
+tsStream.on("drop", (pid, data) => {
+    console.log("drop", pid, data);
+});
+
+tsStream.on("pat", (pid, data) => {
+    //console.log("pat", pid, data);
+});
+
+tsStream.on("pmt", (pid, data) => {
+    //console.log("pmt", pid, data);
 });
 
 /*
