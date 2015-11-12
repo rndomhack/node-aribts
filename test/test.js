@@ -44,7 +44,11 @@ tsStream.on("pmt", (pid, data) => {
 });
 
 tsStream.on("nit", (pid, data) => {
-    //console.log("pmt", pid, data);
+    //console.log("nit", pid, data);
+});
+
+tsStream.on("bat", (pid, data) => {
+    console.log("bat", pid, data);
 });
 
 tsStream.on("end", () => {
