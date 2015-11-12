@@ -35,7 +35,15 @@ tsStream.on("pat", (pid, data) => {
     //console.log("pat", pid, data);
 });
 
+tsStream.on("cat", (pid, data) => {
+    //console.log("cat", pid, data);
+});
+
 tsStream.on("pmt", (pid, data) => {
+    //console.log("pmt", pid, data);
+});
+
+tsStream.on("nit", (pid, data) => {
     //console.log("pmt", pid, data);
 });
 
