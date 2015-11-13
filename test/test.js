@@ -1,6 +1,7 @@
 "use strict";
 
 const fs = require("fs");
+const util = require("util");
 const TsStream = require("../lib/stream");
 
 const readStream = fs.createReadStream(process.argv[2]);
@@ -32,27 +33,27 @@ tsStream.on("scrambling", pid => {
 });
 
 tsStream.on("pat", (pid, data) => {
-    //console.log("pat", pid, data);
+    //console.log("pat", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("cat", (pid, data) => {
-    //console.log("cat", pid, data);
+    //console.log("cat", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("pmt", (pid, data) => {
-    //console.log("pmt", pid, data);
+    //console.log("pmt", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("nit", (pid, data) => {
-    //console.log("nit", pid, data);
+    //console.log("nit", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("bat", (pid, data) => {
-    //console.log("bat", pid, data);
+    //console.log("bat", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("sdt", (pid, data) => {
-    //console.log("bat", pid, data);
+    //console.log("bat", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("end", () => {
