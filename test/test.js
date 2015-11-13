@@ -48,6 +48,10 @@ tsStream.on("nit", (pid, data) => {
 });
 
 tsStream.on("bat", (pid, data) => {
+    //console.log("bat", pid, data);
+});
+
+tsStream.on("sdt", (pid, data) => {
     console.log("bat", pid, data);
 });
 
