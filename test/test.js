@@ -25,11 +25,11 @@ tsStream.on("info", data => {
 });
 
 tsStream.on("drop", pid => {
-    console.log("drop", pid);
+    //console.log("drop", pid);
 });
 
 tsStream.on("scrambling", pid => {
-    console.log("scrambling", pid);
+    //console.log("scrambling", pid);
 });
 
 tsStream.on("pat", (pid, data) => {
@@ -58,6 +58,14 @@ tsStream.on("sdt", (pid, data) => {
 
 tsStream.on("eit", (pid, data) => {
     //console.log("eit", pid, util.inspect(data, {depth: null}));
+});
+
+tsStream.on("tdt", (pid, data) => {
+    //console.log("tdt", pid, util.inspect(data, {depth: null}));
+});
+
+tsStream.on("tot", (pid, data) => {
+    console.log("tot", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("end", () => {
