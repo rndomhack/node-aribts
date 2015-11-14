@@ -53,7 +53,11 @@ tsStream.on("bat", (pid, data) => {
 });
 
 tsStream.on("sdt", (pid, data) => {
-    //console.log("bat", pid, util.inspect(data, {depth: null}));
+    //console.log("sdt", pid, util.inspect(data, {depth: null}));
+});
+
+tsStream.on("eit", (pid, data) => {
+    //console.log("eit", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("end", () => {
