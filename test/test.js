@@ -57,7 +57,9 @@ tsStream.on("sdt", (pid, data) => {
 });
 
 tsStream.on("eit", (pid, data) => {
-    //console.log("eit", pid, util.inspect(data, {depth: null}));
+    if (data.table_id === 0x4E) {
+        console.log("eit", pid, util.inspect(data, {depth: null}));
+    }
 });
 
 tsStream.on("tdt", (pid, data) => {
@@ -65,7 +67,7 @@ tsStream.on("tdt", (pid, data) => {
 });
 
 tsStream.on("tot", (pid, data) => {
-    console.log("tot", pid, util.inspect(data, {depth: null}));
+    //console.log("tot", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("end", () => {
