@@ -2,7 +2,8 @@
 
 const fs = require("fs");
 const util = require("util");
-const TsStream = require("../lib/stream");
+const aribts = require("../index");
+const TsStream = aribts.TsStream;
 
 const readStream = fs.createReadStream(process.argv[2]);
 const tsStream = new TsStream();
@@ -57,9 +58,9 @@ tsStream.on("sdt", (pid, data) => {
 });
 
 tsStream.on("eit", (pid, data) => {
-    if (data.table_id === 0x4E) {
+    //if (data.table_id === 0x4E) {
         //console.log("eit", pid, util.inspect(data, {depth: null}));
-    }
+    //}
 });
 
 tsStream.on("tdt", (pid, data) => {

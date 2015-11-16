@@ -1,1 +1,5 @@
-module.exports = require("./lib/mpeg2ts");
+module.exports = {
+    TsStream: require("./lib/stream"),
+    TsChar: require("./lib/char"),
+    TsDate: require("./lib/date")
+};
