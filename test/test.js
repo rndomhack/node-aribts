@@ -42,7 +42,7 @@ tsStream.on("cat", (pid, data) => {
 });
 
 tsStream.on("pmt", (pid, data) => {
-    //console.log("pmt", pid, util.inspect(data, {depth: null}));
+    console.log("pmt", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("nit", (pid, data) => {
