@@ -59,7 +59,7 @@ tsStream.on("sdt", (pid, data) => {
 
 tsStream.on("eit", (pid, data) => {
     //if (data.table_id === 0x4E) {
-        console.log("eit", pid, util.inspect(data, {depth: null}));
+        //console.log("eit", pid, util.inspect(data, {depth: null}));
     //}
 });
 
