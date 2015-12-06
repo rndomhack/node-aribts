@@ -41,10 +41,12 @@ tsStream.on("eit", (pid, data) => {
         }
     }
 
-    if (tsUtil.getTime().getTime() - time.getTime() < 90 * 1000) return;
+    if (tsUtil.getTime().getTime() - time.getTime() < 30 * 1000) return;
     if (!tsUtil.isPresent(ids.onid, ids.tsid, ids.sid)) return;
+    if (!tsUtil.isFollowing(ids.onid, ids.tsid, ids.sid)) return;
 
-    console.log(util.inspect(tsUtil.getPresent(ids.onid, ids.tsid, ids.sid), {depth: null}));
+    console.log("present", util.inspect(tsUtil.getPresent(ids.onid, ids.tsid, ids.sid), {depth: null}));
+    console.log("following", util.inspect(tsUtil.getFollowing(ids.onid, ids.tsid, ids.sid), {depth: null}));
 
     tsStream.removeAllListeners();
     readStream.unpipe(tsStream);
