@@ -42,25 +42,23 @@ tsStream.on("cat", (pid, data) => {
 });
 
 tsStream.on("pmt", (pid, data) => {
-    console.log("pmt", pid, util.inspect(data, {depth: null}));
+    //console.log("pmt", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("nit", (pid, data) => {
     //console.log("nit", pid, util.inspect(data, {depth: null}));
 });
 
-tsStream.on("bat", (pid, data) => {
-    //console.log("bat", pid, util.inspect(data, {depth: null}));
-});
-
 tsStream.on("sdt", (pid, data) => {
     //console.log("sdt", pid, util.inspect(data, {depth: null}));
 });
 
+tsStream.on("bat", (pid, data) => {
+    //console.log("bat", pid, util.inspect(data, {depth: null}));
+});
+
 tsStream.on("eit", (pid, data) => {
-    //if (data.table_id === 0x4E) {
-        //console.log("eit", pid, util.inspect(data, {depth: null}));
-    //}
+    //console.log("eit", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("tdt", (pid, data) => {
