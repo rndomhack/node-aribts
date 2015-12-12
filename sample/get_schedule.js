@@ -26,15 +26,3 @@ tsStream.on("eit", (pid, data) => {
     readStream.unpipe(tsStream);
     tsStream.end();
 });
-
-tsStream.on("sdt", (pid, data) => {
-    tsUtil.addSdt(pid, data);
-});
-
-tsStream.on("tdt", (pid, data) => {
-    tsUtil.addTdt(pid, data);
-});
-
-tsStream.on("tot", (pid, data) => {
-    tsUtil.addTot(pid, data);
-});

@@ -53,6 +53,10 @@ tsStream.on("eit", (pid, data) => {
     tsStream.end();
 });
 
+tsStream.on("pat", (pid, data) => {
+    tsUtil.addPat(pid, data);
+});
+
 tsStream.on("sdt", (pid, data) => {
     tsUtil.addSdt(pid, data);
 });
