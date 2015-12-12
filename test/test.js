@@ -51,7 +51,7 @@ tsStream.on("pmt", (pid, data) => {
 });
 
 tsStream.on("nit", (pid, data) => {
-    tsUtil.addNit(pid, data);
+    //tsUtil.addNit(pid, data);
     //console.log("nit", pid, util.inspect(data, {depth: null}));
 });
 
