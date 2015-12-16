@@ -66,7 +66,7 @@ tsStream.on("bat", (pid, data) => {
 });
 
 tsStream.on("eit", (pid, data) => {
-    //tsUtil.addEit(pid, data);
+    tsUtil.addEit(pid, data);
     //console.log("eit", pid, util.inspect(data, {depth: null}));
 });
 
