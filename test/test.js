@@ -7,7 +7,10 @@ const TsStream = aribts.TsStream;
 const TsUtil = aribts.TsUtil;
 
 const readStream = fs.createReadStream(process.argv[2]);
-const tsStream = new TsStream();
+const tsStream = new TsStream({
+    transform: true,
+    transPmtIds: [0]
+});
 const tsUtil = new TsUtil();
 
 var fileSize = fs.statSync(process.argv[2]).size;
@@ -33,6 +36,10 @@ tsStream.on("drop", pid => {
 
 tsStream.on("scrambling", pid => {
     //console.log("scrambling", pid);
+});
+
+tsStream.on("packet", (pid, data) => {
+    //if (pid === 0) console.log("packet", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("pat", (pid, data) => {
