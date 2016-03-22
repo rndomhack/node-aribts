@@ -38,9 +38,11 @@ tsStream.on("scrambling", pid => {
     //console.log("scrambling", pid);
 });
 
+/*
 tsStream.on("packet", (pid, data) => {
-    //if (pid === 0) console.log("packet", pid, util.inspect(data, {depth: null}));
+    //console.log("packet", pid, util.inspect(data, {depth: null}));
 });
+*/
 
 tsStream.on("pat", (pid, data) => {
     //tsUtil.addPat(pid, data);
@@ -73,7 +75,7 @@ tsStream.on("bat", (pid, data) => {
 });
 
 tsStream.on("eit", (pid, data) => {
-    tsUtil.addEit(pid, data);
+    //tsUtil.addEit(pid, data);
     //console.log("eit", pid, util.inspect(data, {depth: null}));
 });
 
