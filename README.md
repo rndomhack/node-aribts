@@ -1,5 +1,10 @@
-# node-aribts
+# aribts
 MPEG-2 TS Stream Tool for node
+
+## Install
+```sh
+npm i --save aribts
+```
 
 ## Example
 This example selects only first pmt. 
