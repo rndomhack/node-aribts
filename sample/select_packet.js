@@ -5,8 +5,8 @@ const stream = require("stream");
 const aribts = require("../index");
 const TsStream = aribts.TsStream;
 
-var size = fs.statSync(process.argv[2]).size;
-var bytesRead = 0;
+let size = fs.statSync(process.argv[2]).size;
+let bytesRead = 0;
 
 const readStream = fs.createReadStream(process.argv[2]);
 const writeStream = fs.createWriteStream(process.argv[3]);

@@ -11,8 +11,8 @@ const tsStream = new TsStream();
 
 const tsUtil = new TsUtil();
 
-var time = null;
-var ids = null;
+let time = null;
+let ids = null;
 
 readStream.pipe(tsStream);
 

@@ -13,9 +13,9 @@ const tsStream = new TsStream({
 });
 const tsUtil = new TsUtil();
 
-var fileSize = fs.statSync(process.argv[2]).size;
-var loadSize = 0;
-var count = 0;
+let fileSize = fs.statSync(process.argv[2]).size;
+let loadSize = 0;
+let count = 0;
 
 console.time("load");
 

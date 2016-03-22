@@ -15,7 +15,7 @@ readStream.pipe(tsStream);
 tsStream.on("data", () => {});
 
 tsStream.on("drop", pid => {
-    var time = tsUtil.isTime() ? `${("0" + tsUtil.getTime().getHours()).slice(-2)}:${("0" + tsUtil.getTime().getMinutes()).slice(-2)}:${("0" + tsUtil.getTime().getSeconds()).slice(-2)}` : "unknown";
+    let time = tsUtil.isTime() ? `${("0" + tsUtil.getTime().getHours()).slice(-2)}:${("0" + tsUtil.getTime().getMinutes()).slice(-2)}:${("0" + tsUtil.getTime().getSeconds()).slice(-2)}` : "unknown";
     console.log(`pid: 0x${("000" + pid.toString(16)).slice(-4)}, time: ${tsUtil.isTime() ? time : "unknown"}`);
 });
 
