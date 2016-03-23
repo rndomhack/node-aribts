@@ -7,7 +7,7 @@ npm i --save aribts
 ```
 
 ## Example
-This example selects only first pmt. 
+This example selects only first pmt.
 
 ```js
 const aribts = require("aribts");
@@ -23,7 +23,7 @@ readable.pipe(tsStream);
 tsStream.write(writable);
 ```
 
-This example emit some info event.
+This example emits some info event.
 
 ```js
 const aribts = require("aribts");
@@ -63,5 +63,5 @@ tsStream.on("scrambling", pid => {
 - `packet` - (data) Parsed packet object.
 - `drop` - (pid) Emit when drop is happened.
 - `scrambling` - (pid) Emit when scrambling is happened.
-- `info` - (pid) TS info object.
+- `info` - (data) TS info object.
 - `pat`, `cat`, `pmt`... - (pid, data) Table object.
