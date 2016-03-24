@@ -21,6 +21,9 @@ const transformStream = new stream.Transform({
         done();
     },
     flush: function (done) {
+        console.log("\u001b[2A");
+        console.log(`Done - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
+
         done();
     }
 });
@@ -28,6 +31,7 @@ const tsStream = new TsStream({
     transform: true,
     transPmtIds: [0],
     transPmtPids: [],
+    transPmtSids: [],
     transPids: new Array(0x32).fill(0x00).map((value, index) => index)
 });
 

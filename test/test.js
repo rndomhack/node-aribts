@@ -1,30 +1,48 @@
 "use strict";
 
 const fs = require("fs");
+const stream = require("stream");
 const util = require("util");
 const aribts = require("../index");
 const TsStream = aribts.TsStream;
 const TsUtil = aribts.TsUtil;
 
+let size = fs.statSync(process.argv[2]).size;
+let bytesRead = 0;
+
 const readStream = fs.createReadStream(process.argv[2]);
+const transformStream = new stream.Transform({
+    transform: function (chunk, encoding, done) {
+        bytesRead += chunk.length;
+
+        console.log("\u001b[2A");
+        console.log(`Load - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
+
+        this.push(chunk);
+        done();
+    },
+    flush: function (done) {
+        console.log("\u001b[2A");
+        console.log(`Done - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
+        console.timeEnd("load");
+
+        done();
+    }
+});
 const tsStream = new TsStream({
-    transform: true,
-    transPmtIds: [0]
+    transform: false,
+    transPmtIds: [],
+    transPmtPids: [],
+    transPmtSids: [],
+    transPids: []
 });
 const tsUtil = new TsUtil();
 
-let fileSize = fs.statSync(process.argv[2]).size;
-let loadSize = 0;
-let count = 0;
-
 console.time("load");
 
-readStream.pipe(tsStream);
-
-tsStream.on("data", data => {
-    loadSize += data.length;
-    if (++count % 100000 === 0) console.log(count, loadSize / fileSize * 100);
-});
+readStream.pipe(transformStream);
+transformStream.pipe(tsStream);
+tsStream.on("data", data => {});
 
 tsStream.on("info", data => {
     console.log("info", data);
@@ -87,9 +105,4 @@ tsStream.on("tdt", (pid, data) => {
 tsStream.on("tot", (pid, data) => {
     //tsUtil.addTot(pid, data);
     //console.log("tot", pid, util.inspect(data, {depth: null}));
-});
-
-tsStream.on("end", () => {
-    console.log(count, loadSize / fileSize * 100);
-    console.timeEnd("load");
 });

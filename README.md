@@ -57,6 +57,7 @@ tsStream.on("scrambling", pid => {
   - `bufferSize` - `number` Buffering size.
   - `transPmtIds` - `array` PMT IDs using to select packet.
   - `transPmtPids` - `array` PMT PIDs using to select packet.
+  - `transPmtSids` - `array` PMT SIDs using to select packet.
   - `transPids` - `array` PIDs using to select packet.
 
 ### Events
