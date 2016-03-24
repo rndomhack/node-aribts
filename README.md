@@ -17,7 +17,7 @@ const tsStream = new aribts.TsStream({
     transform: true,
     transPmtIds: [0]
 });
-const writable = fs.createReadStream(process.argv[3]);
+const writable = fs.createWriteStream(process.argv[3]);
 
 readable.pipe(tsStream);
 tsStream.write(writable);
