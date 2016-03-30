@@ -16,11 +16,13 @@ readStream.pipe(tsStream);
 tsStream.on("data", () => {});
 
 tsStream.on("eit", (pid, data) => {
+    if (pid !== 0x12) return;
+
     tsUtil.addEit(pid, data);
 
     if (!tsUtil.isSchedule()) return;
 
-    console.log("present", util.inspect(tsUtil.getSchedule(), {depth: null}));
+    console.log("schedule", util.inspect(tsUtil.getSchedule(), {depth: null}));
 
     tsStream.removeAllListeners();
     readStream.unpipe(tsStream);
