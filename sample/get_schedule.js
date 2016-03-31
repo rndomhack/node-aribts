@@ -23,7 +23,7 @@ tsStream.on("eit", (pid, data) => {
     if (data.table_id === 0x4E || data.table_id === 0x4F) return;
     if (!tsUtil.isSchedule()) return;
 
-    console.log("schedule", util.inspect(tsUtil.getSchedule(), {depth: null}));
+    console.error("schedule", util.inspect(tsUtil.getSchedule(), {depth: null}));
 
     tsStream.removeAllListeners();
     readStream.unpipe(tsStream);

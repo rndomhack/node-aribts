@@ -5,24 +5,24 @@ const stream = require("stream");
 const aribts = require("../index");
 const TsStream = aribts.TsStream;
 
-let size = fs.statSync(process.argv[2]).size;
+let size = process.argv[2] === "-" ? 0 : fs.statSync(process.argv[2]).size;
 let bytesRead = 0;
 
-const readStream = fs.createReadStream(process.argv[2]);
-const writeStream = fs.createWriteStream(process.argv[3]);
+const readStream = process.argv[2] === "-" ? process.stdin : fs.createReadStream(process.argv[2]);
+const writeStream = process.argv[3] === "-" ? process.stdout : fs.createWriteStream(process.argv[3]);
 const transformStream = new stream.Transform({
     transform: function (chunk, encoding, done) {
         bytesRead += chunk.length;
 
-        console.log("\u001b[2A");
-        console.log(`Transform - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
+        console.error("\u001b[2A");
+        console.error(`Transform - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
 
         this.push(chunk);
         done();
     },
     flush: function (done) {
-        console.log("\u001b[2A");
-        console.log(`Done - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
+        console.error("\u001b[2A");
+        console.error(`Done - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
 
         done();
     }
@@ -40,9 +40,9 @@ transformStream.pipe(tsStream);
 tsStream.pipe(writeStream);
 
 tsStream.on("info", data => {
-    console.log("");
-    console.log("info:");
+    console.error("");
+    console.error("info:");
     Object.keys(data).forEach(key => {
-        console.log(`0x${("000" + parseInt(key, 10).toString(16)).slice(-4)}: packet: ${data[key].packet}, drop: ${data[key].drop}, scrambling: ${data[key].scrambling}`);
+        console.error(`0x${("000" + parseInt(key, 10).toString(16)).slice(-4)}: packet: ${data[key].packet}, drop: ${data[key].drop}, scrambling: ${data[key].scrambling}`);
     });
 });
