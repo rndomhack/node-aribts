@@ -15,6 +15,10 @@ readStream.pipe(tsStream);
 
 tsStream.on("data", () => {});
 
+tsStream.on("tot", (pid, data) => {
+    tsUtil.addTot(pid, data);
+});
+
 tsStream.on("eit", (pid, data) => {
     if (pid !== 0x12) return;
 
