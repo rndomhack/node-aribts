@@ -6,7 +6,7 @@ const aribts = require("../index");
 const TsStream = aribts.TsStream;
 const TsUtil = aribts.TsUtil;
 
-const readStream = fs.createReadStream(process.argv[2]);
+const readStream = process.argv[2] === "-" ? process.stdin : fs.createReadStream(process.argv[2]);
 const tsStream = new TsStream();
 
 const tsUtil = new TsUtil();
@@ -41,7 +41,7 @@ tsStream.on("eit", (pid, data) => {
         }
     }
 
-    if (tsUtil.getTime().getTime() - time.getTime() < 30 * 1000) return;
+    if (process.argv[2] !== "-" && tsUtil.getTime().getTime() - time.getTime() < 30 * 1000) return;
     if (!tsUtil.isPresent(ids.onid, ids.tsid, ids.sid)) return;
     if (!tsUtil.isFollowing(ids.onid, ids.tsid, ids.sid)) return;
 
