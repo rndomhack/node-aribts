@@ -7,10 +7,10 @@ const aribts = require("../index");
 const TsStream = aribts.TsStream;
 const TsUtil = aribts.TsUtil;
 
-let size = fs.statSync(process.argv[2]).size;
+let size = process.argv[2] === "-" ? 0 : fs.statSync(process.argv[2]).size;
 let bytesRead = 0;
 
-const readStream = fs.createReadStream(process.argv[2]);
+const readStream = process.argv[2] === "-" ? process.stdin : fs.createReadStream(process.argv[2]);
 const transformStream = new stream.Transform({
     transform: function (chunk, encoding, done) {
         bytesRead += chunk.length;
@@ -99,10 +99,18 @@ tsStream.on("eit", (pid, data) => {
 
 tsStream.on("tdt", (pid, data) => {
     //tsUtil.addTdt(pid, data);
-    //console.log("tdt", pid, util.inspect(data, {depth: null}));
+    console.log("tdt", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("tot", (pid, data) => {
     //tsUtil.addTot(pid, data);
     //console.log("tot", pid, util.inspect(data, {depth: null}));
+});
+
+tsStream.on("dit", (pid, data) => {
+    //console.log("dit", pid, util.inspect(data, {depth: null}));
+});
+
+tsStream.on("sit", (pid, data) => {
+    //console.log("sit", pid, util.inspect(data, {depth: null}));
 });
