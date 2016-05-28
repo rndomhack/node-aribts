@@ -30,6 +30,7 @@ const transformStream = new stream.Transform({
     }
 });
 const tsStream = new TsStream({
+    packetSize: 188,
     transform: false,
     transPmtIds: [],
     transPmtPids: [],
@@ -99,7 +100,7 @@ tsStream.on("eit", (pid, data) => {
 
 tsStream.on("tdt", (pid, data) => {
     //tsUtil.addTdt(pid, data);
-    console.log("tdt", pid, util.inspect(data, {depth: null}));
+    //console.log("tdt", pid, util.inspect(data, {depth: null}));
 });
 
 tsStream.on("tot", (pid, data) => {
