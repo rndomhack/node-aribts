@@ -38,10 +38,10 @@ tsStream.on("data", () => {
     // nothing
 });
 
-tsStream.on("drop", pid => {
+tsStream.on("drop", (pid, counter, expected) => {
     let time = tsUtil.isTime() ? `${("0" + tsUtil.getTime().getHours()).slice(-2)}:${("0" + tsUtil.getTime().getMinutes()).slice(-2)}:${("0" + tsUtil.getTime().getSeconds()).slice(-2)}` : "unknown";
 
-    console.error(`pid: 0x${("000" + pid.toString(16)).slice(-4)}, time: ${time}`);
+    console.error(`pid: 0x${("000" + pid.toString(16)).slice(-4)}, counter: ${counter}, expected: ${expected}, time: ${time}`);
     console.error("");
 });
 
