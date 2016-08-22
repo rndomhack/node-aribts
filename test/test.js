@@ -46,76 +46,84 @@ transformStream.pipe(tsStream);
 tsStream.on("data", data => {});
 
 tsStream.on("info", data => {
-    console.log("info", data);
+    console.log("info", data, "\n");
 });
 
 tsStream.on("drop", pid => {
-    //console.log("drop", pid);
+    //console.log("drop", pid, "\n");
 });
 
 tsStream.on("scrambling", pid => {
-    //console.log("scrambling", pid);
+    //console.log("scrambling", pid, "\n");
 });
 
 /*
 tsStream.on("packet", (pid, data) => {
-    //console.log("packet", pid, util.inspect(data, {depth: null}));
+    //console.log("packet", pid, util.inspect(data, {depth: null}), "\n");
 });
 */
 
 tsStream.on("pat", (pid, data) => {
     //tsUtil.addPat(pid, data);
-    //console.log("pat", pid, util.inspect(data, {depth: null}));
+    //console.log("pat", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("cat", (pid, data) => {
     //tsUtil.addCat(pid, data);
-    //console.log("cat", pid, util.inspect(data, {depth: null}));
+    //console.log("cat", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("pmt", (pid, data) => {
     //tsUtil.addPmt(pid, data);
-    //console.log("pmt", pid, util.inspect(data, {depth: null}));
+    //console.log("pmt", pid, util.inspect(data, {depth: null}), "\n");
+});
+
+tsStream.on("dsmcc", (pid, data) => {
+    //console.log("dsmcc", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("nit", (pid, data) => {
     //tsUtil.addNit(pid, data);
-    //console.log("nit", pid, util.inspect(data, {depth: null}));
+    //console.log("nit", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("sdt", (pid, data) => {
     //tsUtil.addSdt(pid, data);
-    //console.log("sdt", pid, util.inspect(data, {depth: null}));
+    //console.log("sdt", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("bat", (pid, data) => {
     //tsUtil.addBat(pid, data);
-    //console.log("bat", pid, util.inspect(data, {depth: null}));
+    //console.log("bat", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("eit", (pid, data) => {
     //tsUtil.addEit(pid, data);
-    //console.log("eit", pid, util.inspect(data, {depth: null}));
+    //console.log("eit", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("tdt", (pid, data) => {
     //tsUtil.addTdt(pid, data);
-    //console.log("tdt", pid, util.inspect(data, {depth: null}));
+    //console.log("tdt", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("tot", (pid, data) => {
     //tsUtil.addTot(pid, data);
-    //console.log("tot", pid, util.inspect(data, {depth: null}));
+    //console.log("tot", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("dit", (pid, data) => {
-    //console.log("dit", pid, util.inspect(data, {depth: null}));
+    //console.log("dit", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("sit", (pid, data) => {
-    //console.log("sit", pid, util.inspect(data, {depth: null}));
+    //console.log("sit", pid, util.inspect(data, {depth: null}), "\n");
+});
+
+tsStream.on("sdtt", (pid, data) => {
+    //console.log("sdtt", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("cdt", (pid, data) => {
-    //console.log("cdt", pid, util.inspect(data, {depth: null}));
+    //console.log("cdt", pid, util.inspect(data, {depth: null}), "\n");
 });
