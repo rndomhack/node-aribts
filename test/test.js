@@ -115,3 +115,7 @@ tsStream.on("dit", (pid, data) => {
 tsStream.on("sit", (pid, data) => {
     //console.log("sit", pid, util.inspect(data, {depth: null}));
 });
+
+tsStream.on("cdt", (pid, data) => {
+    //console.log("cdt", pid, util.inspect(data, {depth: null}));
+});
