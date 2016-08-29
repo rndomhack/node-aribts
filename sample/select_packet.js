@@ -5,6 +5,11 @@ const stream = require("stream");
 const aribts = require("../index");
 const TsStream = aribts.TsStream;
 
+if (process.argv < 4) {
+    console.error("Usage: node get_present_following.js /path/to/infile.ts /path/to/outfile.ts");
+    process.exit(1);
+}
+
 let size = process.argv[2] === "-" ? 0 : fs.statSync(process.argv[2]).size;
 let bytesRead = 0;
 

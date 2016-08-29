@@ -1,7 +1,8 @@
 module.exports = {
     TsStream: require("./lib/stream"),
+    TsCrc32: require("./lib/crc32"),
     TsChar: require("./lib/char"),
     TsDate: require("./lib/date"),
-    TsUtil: require("./lib/util"),
-    TsLogo: require("./lib/logo")
+    TsLogo: require("./lib/logo"),
+    TsUtil: require("./lib/util")
 };

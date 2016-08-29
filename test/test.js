@@ -79,6 +79,7 @@ tsStream.on("pmt", (pid, data) => {
 });
 
 tsStream.on("dsmcc", (pid, data) => {
+    //tsUtil.addDsmcc(pid, data);
     //console.log("dsmcc", pid, util.inspect(data, {depth: null}), "\n");
 });
 
@@ -121,9 +122,11 @@ tsStream.on("sit", (pid, data) => {
 });
 
 tsStream.on("sdtt", (pid, data) => {
+    //tsUtil.addSdtt(pid, data);
     //console.log("sdtt", pid, util.inspect(data, {depth: null}), "\n");
 });
 
 tsStream.on("cdt", (pid, data) => {
+    //tsUtil.addCdt(pid, data);
     //console.log("cdt", pid, util.inspect(data, {depth: null}), "\n");
 });

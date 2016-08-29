@@ -6,6 +6,11 @@ const aribts = require("../index");
 const TsStream = aribts.TsStream;
 const TsUtil = aribts.TsUtil;
 
+if (process.argv < 3) {
+    console.error("Usage: node check_drop.js /path/to/file.ts");
+    process.exit(1);
+}
+
 let size = process.argv[2] === "-" ? 0 : fs.statSync(process.argv[2]).size;
 let bytesRead = 0;
 
@@ -39,7 +44,13 @@ tsStream.on("data", () => {
 });
 
 tsStream.on("drop", (pid, counter, expected) => {
-    let time = tsUtil.isTime() ? `${("0" + tsUtil.getTime().getHours()).slice(-2)}:${("0" + tsUtil.getTime().getMinutes()).slice(-2)}:${("0" + tsUtil.getTime().getSeconds()).slice(-2)}` : "unknown";
+    let time = "unknown";
+
+    if (tsUtil.hasTime()) {
+        let date = tsUtil.getTime();
+
+        time = `${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`;
+    }
 
     console.error(`pid: 0x${("000" + pid.toString(16)).slice(-4)}, counter: ${counter}, expected: ${expected}, time: ${time}`);
     console.error("");
