@@ -102,7 +102,6 @@ tsStream.on("sdt", (pid, data) => {
 });
 
 tsStream.on("sdtt", (pid, data) => {
-    console.log("sdtt", pid, data.table_id_ext);
     tsUtil.addSdtt(pid, data);
 });
 
