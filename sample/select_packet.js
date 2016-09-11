@@ -3,51 +3,57 @@
 const fs = require("fs");
 const stream = require("stream");
 const aribts = require("../index");
-const TsStream = aribts.TsStream;
 
-if (process.argv < 4) {
-    console.error("Usage: node get_present_following.js /path/to/infile.ts /path/to/outfile.ts");
+if (process.argv.length < 5) {
+    console.error("Usage: node select_packet.js /path/to/infile.ts /path/to/outfile.ts programNumber1 programNumber2 ...");
     process.exit(1);
 }
 
-let size = process.argv[2] === "-" ? 0 : fs.statSync(process.argv[2]).size;
+const size = process.argv[2] === "-" ? 0 : fs.statSync(process.argv[2]).size;
 let bytesRead = 0;
 
-const readStream = process.argv[2] === "-" ? process.stdin : fs.createReadStream(process.argv[2]);
-const writeStream = process.argv[3] === "-" ? process.stdout : fs.createWriteStream(process.argv[3]);
+const readableStream = process.argv[2] === "-" ? process.stdin : fs.createReadStream(process.argv[2]);
+const writableStream = process.argv[3] === "-" ? process.stdout : fs.createWriteStream(process.argv[3]);
 const transformStream = new stream.Transform({
     transform: function (chunk, encoding, done) {
         bytesRead += chunk.length;
 
-        console.error("\u001b[2A");
-        console.error(`Transform - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
+        process.stderr.write("\r\u001b[K");
+        process.stderr.write(`Transform - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
 
         this.push(chunk);
         done();
     },
     flush: function (done) {
-        console.error("\u001b[2A");
-        console.error(`Done - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
+        process.stderr.write("\r\u001b[K");
+        process.stderr.write(`Done - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
 
         done();
     }
 });
-const tsStream = new TsStream({
-    transform: true,
-    transPmtIds: [0],
-    transPmtPids: [],
-    transPmtSids: [],
-    transPids: new Array(0x32).fill(0x00).map((value, index) => index)
-});
 
-readStream.pipe(transformStream);
-transformStream.pipe(tsStream);
-tsStream.pipe(writeStream);
-
-tsStream.on("info", data => {
-    console.error("");
-    console.error("info:");
-    Object.keys(data).forEach(key => {
-        console.error(`0x${("000" + parseInt(key, 10).toString(16)).slice(-4)}: packet: ${data[key].packet}, drop: ${data[key].drop}, scrambling: ${data[key].scrambling}`);
-    });
+const tsReadableConnector = new aribts.TsReadableConnector();
+const tsWritableConnector = new aribts.TsWritableConnector();
+const tsPacketParser = new aribts.TsPacketParser();
+const tsPacketConverter = new aribts.TsPacketConverter();
+const tsPacketAnalyzer = new aribts.TsPacketAnalyzer();
+const tsPacketSelector = new aribts.TsPacketSelector({
+    pids: new Array(0x30).fill(0).map((_, index) => index),
+    programNumbers: process.argv.slice(4).map(str => Number.parseInt(str, 10))
 });
+const tsSectionParser = new aribts.TsSectionParser();
+
+readableStream.pipe(transformStream);
+transformStream.pipe(tsReadableConnector);
+tsWritableConnector.pipe(writableStream);
+
+tsSectionParser.on("pat", tsPacketSelector.onPat.bind(tsPacketSelector));
+tsSectionParser.on("cat", tsPacketSelector.onCat.bind(tsPacketSelector));
+tsSectionParser.on("pmt", tsPacketSelector.onPmt.bind(tsPacketSelector));
+
+tsReadableConnector.pipe(tsPacketParser);
+tsPacketParser.pipe(tsPacketAnalyzer);
+tsPacketParser.pipe(tsSectionParser);
+tsPacketParser.pipe(tsPacketSelector);
+tsPacketSelector.pipe(tsPacketConverter);
+tsPacketConverter.pipe(tsWritableConnector);
