@@ -107,6 +107,21 @@ tsSectionUpdater.on("sit", tsSection => {
     //console.error("sit", util.inspect(tsSection.decode(), {depth: null}));
 });
 
+tsSectionUpdater.on("ecm", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("ecm", util.inspect(tsSection.decode(), {depth: null}));
+});
+
+tsSectionUpdater.on("emm", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("emm", util.inspect(tsSection.decode(), {depth: null}));
+});
+
+tsSectionUpdater.on("emmm", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("emmm", util.inspect(tsSection.decode(), {depth: null}));
+});
+
 tsSectionUpdater.on("sdtt", tsSection => {
     //process.stderr.write("\r\u001b[K");
     //console.error("sdtt", util.inspect(tsSection.decode(), {depth: null}));
