@@ -1,6 +1,6 @@
 {
   "name": "aribts",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "MPEG-2 TS Stream Tool for node",
   "main": "index.js",
   "scripts": {
