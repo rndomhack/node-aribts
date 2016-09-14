@@ -1,132 +1,141 @@
 "use strict";
 
 const fs = require("fs");
-const stream = require("stream");
 const util = require("util");
+const stream = require("stream");
 const aribts = require("../index");
-const TsStream = aribts.TsStream;
-const TsUtil = aribts.TsUtil;
 
-let size = process.argv[2] === "-" ? 0 : fs.statSync(process.argv[2]).size;
+const startTime = Date.now();
+const size = process.argv[2] === "-" ? 0 : fs.statSync(process.argv[2]).size;
 let bytesRead = 0;
 
-const readStream = process.argv[2] === "-" ? process.stdin : fs.createReadStream(process.argv[2]);
+const readableStream = process.argv[2] === "-" ? process.stdin : fs.createReadStream(process.argv[2]);
 const transformStream = new stream.Transform({
     transform: function (chunk, encoding, done) {
         bytesRead += chunk.length;
 
-        console.log("\u001b[2A");
-        console.log(`Load - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
+        process.stderr.write("\r\u001b[K");
+        process.stderr.write(`Load - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
 
         this.push(chunk);
         done();
     },
     flush: function (done) {
-        console.log("\u001b[2A");
-        console.log(`Done - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
-        console.timeEnd("load");
+        process.stderr.write("\r\u001b[K");
+        process.stderr.write(`Done - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]\n`);
+        process.stderr.write(`time: ${(Date.now() - startTime) / 1000} s`);
 
         done();
     }
 });
-const tsStream = new TsStream({
-    packetSize: 188,
-    transform: false,
-    transPmtIds: [],
-    transPmtPids: [],
-    transPmtSids: [],
-    transPids: []
-});
-const tsUtil = new TsUtil();
 
-console.time("load");
+const tsReadableConnector = new aribts.TsReadableConnector();
+const tsPacketParser = new aribts.TsPacketParser();
+const tsPacketAnalyzer = new aribts.TsPacketAnalyzer();
+const tsSectionParser = new aribts.TsSectionParser();
+const tsSectionUpdater = new aribts.TsSectionUpdater();
+const tsSectionAnalyzer = new aribts.TsSectionAnalyzer();
 
-readStream.pipe(transformStream);
-transformStream.pipe(tsStream);
-tsStream.on("data", data => {});
-
-tsStream.on("info", data => {
-    console.log("info", data, "\n");
+tsPacketAnalyzer.on("packetDrop", pid => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("drop", pid);
 });
 
-tsStream.on("drop", pid => {
-    //console.log("drop", pid, "\n");
+tsPacketAnalyzer.on("packetScrambling", pid => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("scrambling", pid);
 });
 
-tsStream.on("scrambling", pid => {
-    //console.log("scrambling", pid, "\n");
+tsSectionUpdater.on("pat", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("pat", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-/*
-tsStream.on("packet", (pid, data) => {
-    //console.log("packet", pid, util.inspect(data, {depth: null}), "\n");
-});
-*/
-
-tsStream.on("pat", (pid, data) => {
-    //tsUtil.addPat(pid, data);
-    //console.log("pat", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("cat", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("cat", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("cat", (pid, data) => {
-    //tsUtil.addCat(pid, data);
-    //console.log("cat", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("pmt", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("pmt", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("pmt", (pid, data) => {
-    //tsUtil.addPmt(pid, data);
-    //console.log("pmt", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("dsmcc", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("dsmcc", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("dsmcc", (pid, data) => {
-    //tsUtil.addDsmcc(pid, data);
-    //console.log("dsmcc", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("nit", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("nit", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("nit", (pid, data) => {
-    //tsUtil.addNit(pid, data);
-    //console.log("nit", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("sdt", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("sdt", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("sdt", (pid, data) => {
-    //tsUtil.addSdt(pid, data);
-    //console.log("sdt", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("bat", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("bat", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("bat", (pid, data) => {
-    //tsUtil.addBat(pid, data);
-    //console.log("bat", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("eit", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("eit", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("eit", (pid, data) => {
-    //tsUtil.addEit(pid, data);
-    //console.log("eit", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("tdt", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("tdt", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("tdt", (pid, data) => {
-    //tsUtil.addTdt(pid, data);
-    //console.log("tdt", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("tot", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("tot", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("tot", (pid, data) => {
-    //tsUtil.addTot(pid, data);
-    //console.log("tot", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("dit", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("dit", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("dit", (pid, data) => {
-    //console.log("dit", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("sit", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("sit", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("sit", (pid, data) => {
-    //console.log("sit", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("ecm", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("ecm", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("sdtt", (pid, data) => {
-    //tsUtil.addSdtt(pid, data);
-    //console.log("sdtt", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("emm", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("emm", util.inspect(tsSection.decode(), {depth: null}));
 });
 
-tsStream.on("cdt", (pid, data) => {
-    //tsUtil.addCdt(pid, data);
-    //console.log("cdt", pid, util.inspect(data, {depth: null}), "\n");
+tsSectionUpdater.on("emmm", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("emmm", util.inspect(tsSection.decode(), {depth: null}));
 });
+
+tsSectionUpdater.on("sdtt", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("sdtt", util.inspect(tsSection.decode(), {depth: null}));
+});
+
+tsSectionUpdater.on("cdt", tsSection => {
+    //process.stderr.write("\r\u001b[K");
+    //console.error("cdt", util.inspect(tsSection.decode(), {depth: null}));
+});
+
+readableStream.pipe(transformStream);
+transformStream.pipe(tsReadableConnector);
+
+tsReadableConnector.pipe(tsPacketParser);
+tsPacketParser.pipe(tsPacketAnalyzer);
+tsPacketParser.pipe(tsSectionParser);
+tsSectionParser.pipe(tsSectionUpdater);
+tsSectionParser.pipe(tsSectionAnalyzer);
