@@ -11,6 +11,7 @@ if (process.argv.length < 3) {
 
 const size = process.argv[2] === "-" ? 0 : fs.statSync(process.argv[2]).size;
 let bytesRead = 0;
+let count = 0;
 let time = null;
 
 const readableStream = process.argv[2] === "-" ? process.stdin : fs.createReadStream(process.argv[2]);
@@ -18,8 +19,11 @@ const transformStream = new stream.Transform({
     transform: function (chunk, encoding, done) {
         bytesRead += chunk.length;
 
-        process.stderr.write("\r\u001b[K");
-        process.stderr.write(`Check - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
+        if (++count === 100) {
+            process.stderr.write("\r\u001b[K");
+            process.stderr.write(`Check - ${bytesRead} of ${size} [${Math.floor(bytesRead / size * 100)}%]`);
+            count = 0;
+        }
 
         this.push(chunk);
         done();
