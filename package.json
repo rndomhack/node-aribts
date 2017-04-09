@@ -12,9 +12,11 @@
   },
   "author": "rndomhack",
   "dependencies": {
-    "crc": "^3.4.0",
-    "eventemitter3": "^2.0.0",
-    "iconv-lite": "^0.4.13"
+    "bindings": "^1.2.1",
+    "crc": "^3.4.4",
+    "eventemitter3": "^2.0.3",
+    "iconv-lite": "^0.4.15",
+    "nan": "^2.6.1"
   },
   "license": "MIT"
 }
