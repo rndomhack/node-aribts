@@ -48,7 +48,7 @@ gulp.task("build", ["build-dts"])
 gulp.task("test", test)
 
 gulp.task("watch", () => {
-    gulp.watch("src/**/*.ts", ["build-dts"]);
+    gulp.watch(["src/**/*.ts", "tslint.json"], ["build-dts"]);
     gulp.watch("test/**/*.js", ["test"]);
 });
 

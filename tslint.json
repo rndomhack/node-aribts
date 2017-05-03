@@ -13,30 +13,29 @@
     "prefer-method-signature": true,
     "strict-type-predicates": false,
     "adjacent-overload-signatures": false,
-    "align": [
-      false
-    ],
+    "align": false,
     "array-type": [
-      false
+      true,
+      "array-simple"
     ],
     "arrow-parens": false,
     "ban": false,
+    "ban-types": [
+      ["Object", "Avoid using the `Object` type. Did you mean `object`?"],
+      ["Function", "Avoid using the `Function` type. Prefer a specific function type, like `() => void`."],
+      ["Boolean", "Avoid using the `Boolean` type. Did you mean `boolean`?"],
+      ["Number", "Avoid using the `Number` type. Did you mean `number`?"],
+      ["String", "Avoid using the `String` type. Did you mean `string`?"],
+      ["Symbol", "Avoid using the `Symbol` type. Did you mean `symbol`?"]
+    ],
     "callable-types": true,
     "class-name": true,
-    "comment-format": [
-      false
-    ],
-    "completed-docs": [
-      false
-    ],
+    "comment-format": true,
+    "completed-docs": false,
     "curly": true,
-    "cyclomatic-complexity": [
-      false
-    ],
-    "eofline": false,
-    "file-header": [
-      false
-    ],
+    "cyclomatic-complexity": false,
+    "eofline": true,
+    "file-header": false,
     "forin": false,
     "import-blacklist": false,
     "import-spacing": true,
@@ -44,31 +43,26 @@
       true,
       "spaces"
     ],
-    "interface-name": false,
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
     "interface-over-type-literal": false,
     "jsdoc-format": false,
     "label-position": true,
-    "max-classes-per-file": [
-      false
-    ],
-    "max-file-line-count": [
-      false
-    ],
+    "max-classes-per-file": false,
+    "max-file-line-count": false,
     "max-line-length": false,
     "member-access": false,
-    "member-ordering": [
-      false
-    ],
+    "member-ordering": false,
     "new-parens": true,
     "no-angle-bracket-type-assertion": false,
     "no-any": false,
     "no-arg": true,
     "no-bitwise": false,
     "no-conditional-assignment": true,
-    "no-consecutive-blank-lines": [
-      true
-    ],
-    "no-console": false,
+    "no-consecutive-blank-lines": true,
+    "no-console": true,
     "no-construct": true,
     "no-debugger": true,
     "no-default-export": false,
@@ -77,9 +71,7 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-for-in-array": false,
-    "no-inferrable-types": [
-      false
-    ],
+    "no-inferrable-types": false,
     "no-inferred-empty-object-type": false,
     "no-internal-module": false,
     "no-invalid-this": false,
@@ -100,7 +92,7 @@
     "no-unused-expression": false,
     "no-use-before-declare": false,
     "no-var-keyword": true,
-    "no-var-requires": false,
+    "no-var-requires": true,
     "no-void-expression": false,
     "object-literal-key-quotes": [
       false,
@@ -116,12 +108,8 @@
       "check-whitespace"
     ],
     "one-variable-per-declaration": false,
-    "only-arrow-functions": [
-      false
-    ],
-    "ordered-imports": [
-      false
-    ],
+    "only-arrow-functions": false,
+    "ordered-imports": false,
     "prefer-const": true,
     "prefer-for-of": false,
     "promise-function-async": false,
@@ -153,15 +141,16 @@
       true,
       "property-declaration"
     ],
-    "typedef-whitespace": [
-      false
-    ],
+    "typedef-whitespace": false,
     "typeof-compare": true,
     "unified-signatures": false,
     "use-isnan": true,
     "variable-name": [
+      true,
       "check-format",
       "allow-leading-underscore",
+      "allow-pascal-case",
+      "allow-snake-case",
       "ban-keywords"
     ],
     "whitespace": [
