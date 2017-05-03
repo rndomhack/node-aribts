@@ -253,14 +253,14 @@ export default class TsDescriptors {
                 }
 
                 case 0x43: {
-                    //Satellite delivery system
+                    // Satellite delivery system
                     tsDescriptor = new descriptorIndex.TsDescriptorSatelliteDeliverySystem(buffer);
 
                     break;
                 }
 
                 case 0x44: {
-                    //Cable delivery system
+                    // Cable delivery system
                     tsDescriptor = new descriptorIndex.TsDescriptorCableDeliverySystem(buffer);
 
                     break;

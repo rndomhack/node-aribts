@@ -3,7 +3,7 @@ import TsUtil from "./util";
 import { Section } from "./section_parser";
 
 export default class TsSectionUpdater extends TsBase {
-    _versions: Object;
+    _versions: object;
 
     constructor() {
         super();

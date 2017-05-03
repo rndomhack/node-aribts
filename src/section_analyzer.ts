@@ -14,7 +14,7 @@ export interface Service {
 }
 
 export default class TsSectionAnalyzer extends TsBase {
-    _versions: Object;
+    _versions: object;
 
     _patFlag: boolean;
     _nitFlag: boolean;
