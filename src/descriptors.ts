@@ -1,185 +1,96 @@
-import Base from "./descriptor/base";
-import VideoStream from "./descriptor/video_stream";
-import AudioStream from "./descriptor/audio_stream";
-import Hierarchy from "./descriptor/hierarchy";
-import Registration from "./descriptor/registration";
-import DataStreamAlignment from "./descriptor/data_stream_alignment";
-import TargetBackgroundGrid from "./descriptor/target_background_grid";
-import VideoWindow from "./descriptor/video_window";
-import ConditionalAccess from "./descriptor/conditional_access";
-import Iso639Language from "./descriptor/iso_639_language";
-import SystemClock from "./descriptor/system_clock";
-import MultiplexBufferUtilization from "./descriptor/multiplex_buffer_utilization";
-import Copyright from "./descriptor/copyright";
-import PrivateDataIndicator from "./descriptor/private_data_indicator";
-import SmoothingBuffer from "./descriptor/smoothing_buffer";
-import Std from "./descriptor/std";
-import Ibp from "./descriptor/ibp";
-import NetworkName from "./descriptor/network_name";
-import ServiceList from "./descriptor/service_list";
-import Stuffing from "./descriptor/stuffing";
-import SatelliteDeliverySystem from "./descriptor/satellite_delivery_system";
-import CableDeliverySystem from "./descriptor/cable_delivery_system";
-import BouquetName from "./descriptor/bouquet_name";
-import Service from "./descriptor/service";
-import CountryAvailability from "./descriptor/country_availability";
-import Linkage from "./descriptor/linkage";
-import NearVideoOnDemandReference from "./descriptor/near_video_on_demand_reference";
-import TimeShiftedService from "./descriptor/time_shifted_service";
-import ShortEvent from "./descriptor/short_event";
-import ExtendedEvent from "./descriptor/extended_event";
-import TimeShiftedEvent from "./descriptor/time_shifted_event";
-import Component from "./descriptor/component";
-import Mosaic from "./descriptor/mosaic";
-import StreamIdentifier from "./descriptor/stream_identifier";
-import CaIdentifier from "./descriptor/ca_identifier";
-import Content from "./descriptor/content";
-import ParentalRating from "./descriptor/parental_rating";
-import LocalTimeOffset from "./descriptor/local_time_offset";
-import PartialTransportStream from "./descriptor/partial_transport_stream";
-import DataBroadcastId from "./descriptor/data_broadcast_id";
-import MaterialInformation from "./descriptor/material_information";
-import HybridInformation from "./descriptor/hybrid_information";
-import HierarchicalTransmission from "./descriptor/hierarchical_transmission";
-import DigitalCopyControl from "./descriptor/digital_copy_control";
-import NetworkIdentification from "./descriptor/network_identification";
-import PartialTransportStreamTime from "./descriptor/partial_transport_stream_time";
-import AudioComponent from "./descriptor/audio_component";
-import Hyperlink from "./descriptor/hyperlink";
-import TargetRegion from "./descriptor/target_region";
-import DataContent from "./descriptor/data_content";
-import VideoDecodeControl from "./descriptor/video_decode_control";
-import DownloadContent from "./descriptor/download_content";
-import CaEmmTs from "./descriptor/ca_emm_ts";
-import CaContractInfo from "./descriptor/ca_contract_info";
-import CaService from "./descriptor/ca_service";
-import TsInformation from "./descriptor/ts_information";
-import ExtendedBroadcaster from "./descriptor/extended_broadcaster";
-import LogoTransmission from "./descriptor/logo_transmission";
-import BasicLocalEvent from "./descriptor/basic_local_event";
-import Reference from "./descriptor/reference";
-import NodeRelation from "./descriptor/node_relation";
-import ShortNodeInformation from "./descriptor/short_node_information";
-import StcReference from "./descriptor/stc_reference";
-import Series from "./descriptor/series";
-import EventGroup from "./descriptor/event_group";
-import SiParameter from "./descriptor/si_parameter";
-import BroadcasterName from "./descriptor/broadcaster_name";
-import ComponentGroup from "./descriptor/component_group";
-import SiPrimeTs from "./descriptor/si_prime_ts";
-import BoardInformation from "./descriptor/board_information";
-import LdtLinkage from "./descriptor/ldt_linkage";
-import ConnectedTransmission from "./descriptor/connected_transmission";
-import ContentAvailability from "./descriptor/content_availability";
-import ServiceGroup from "./descriptor/service_group";
-import AreaBroadcastingInformation from "./descriptor/area_broadcasting_information";
-import NetworkDownloadContent from "./descriptor/network_download_content";
-import DlProtection from "./descriptor/dl_protection";
-import CaStartup from "./descriptor/ca_startup";
-import CableMulticarrierTransmissionDeliverySystem from "./descriptor/cable_multicarrier_transmission_delivery_system";
-import AdvancedCableDeliverySystem from "./descriptor/advanced_cable_delivery_system";
-import ScrambleSystem from "./descriptor/scramble_system";
-import AccessControl from "./descriptor/access_control";
-import CarouselCompatibleComposite from "./descriptor/carousel_compatible_composite";
-import ConditionalPlayback from "./descriptor/conditional_playback";
-import CableTsDivisionSystem from "./descriptor/cable_ts_division_system";
-import TerrestrialDeliverySystem from "./descriptor/terrestrial_delivery_system";
-import PartialReception from "./descriptor/partial_reception";
-import EmergencyInformation from "./descriptor/emergency_information";
-import DataComponent from "./descriptor/data_component";
-import SystemManagement from "./descriptor/system_management";
+import * as descriptorIndex from "./descriptor/index";
 
 export type TsDescriptor = (
-    Base |
-    VideoStream |
-    AudioStream |
-    Hierarchy |
-    Registration |
-    DataStreamAlignment |
-    TargetBackgroundGrid |
-    VideoWindow |
-    ConditionalAccess |
-    Iso639Language |
-    SystemClock |
-    MultiplexBufferUtilization |
-    Copyright |
-    PrivateDataIndicator |
-    SmoothingBuffer |
-    Std |
-    Ibp |
-    NetworkName |
-    ServiceList |
-    Stuffing |
-    SatelliteDeliverySystem |
-    CableDeliverySystem |
-    BouquetName |
-    Service |
-    CountryAvailability |
-    Linkage |
-    NearVideoOnDemandReference |
-    TimeShiftedService |
-    ShortEvent |
-    ExtendedEvent |
-    TimeShiftedEvent |
-    Component |
-    Mosaic |
-    StreamIdentifier |
-    CaIdentifier |
-    Content |
-    ParentalRating |
-    LocalTimeOffset |
-    PartialTransportStream |
-    DataBroadcastId |
-    MaterialInformation |
-    HybridInformation |
-    HierarchicalTransmission |
-    DigitalCopyControl |
-    NetworkIdentification |
-    PartialTransportStreamTime |
-    AudioComponent |
-    Hyperlink |
-    TargetRegion |
-    DataContent |
-    VideoDecodeControl |
-    DownloadContent |
-    CaEmmTs |
-    CaContractInfo |
-    CaService |
-    TsInformation |
-    ExtendedBroadcaster |
-    LogoTransmission |
-    BasicLocalEvent |
-    Reference |
-    NodeRelation |
-    ShortNodeInformation |
-    StcReference |
-    Series |
-    EventGroup |
-    SiParameter |
-    BroadcasterName |
-    ComponentGroup |
-    SiPrimeTs |
-    BoardInformation |
-    LdtLinkage |
-    ConnectedTransmission |
-    ContentAvailability |
-    ServiceGroup |
-    AreaBroadcastingInformation |
-    NetworkDownloadContent |
-    DlProtection |
-    CaStartup |
-    CableMulticarrierTransmissionDeliverySystem |
-    AdvancedCableDeliverySystem |
-    ScrambleSystem |
-    AccessControl |
-    CarouselCompatibleComposite |
-    ConditionalPlayback |
-    CableTsDivisionSystem |
-    TerrestrialDeliverySystem |
-    PartialReception |
-    EmergencyInformation |
-    DataComponent |
-    SystemManagement
+    descriptorIndex.TsDescriptorBase |
+    descriptorIndex.TsDescriptorVideoStream |
+    descriptorIndex.TsDescriptorAudioStream |
+    descriptorIndex.TsDescriptorHierarchy |
+    descriptorIndex.TsDescriptorRegistration |
+    descriptorIndex.TsDescriptorDataStreamAlignment |
+    descriptorIndex.TsDescriptorTargetBackgroundGrid |
+    descriptorIndex.TsDescriptorVideoWindow |
+    descriptorIndex.TsDescriptorConditionalAccess |
+    descriptorIndex.TsDescriptorIso639Language |
+    descriptorIndex.TsDescriptorSystemClock |
+    descriptorIndex.TsDescriptorMultiplexBufferUtilization |
+    descriptorIndex.TsDescriptorCopyright |
+    descriptorIndex.TsDescriptorPrivateDataIndicator |
+    descriptorIndex.TsDescriptorSmoothingBuffer |
+    descriptorIndex.TsDescriptorStd |
+    descriptorIndex.TsDescriptorIbp |
+    descriptorIndex.TsDescriptorNetworkName |
+    descriptorIndex.TsDescriptorServiceList |
+    descriptorIndex.TsDescriptorStuffing |
+    descriptorIndex.TsDescriptorSatelliteDeliverySystem |
+    descriptorIndex.TsDescriptorCableDeliverySystem |
+    descriptorIndex.TsDescriptorBouquetName |
+    descriptorIndex.TsDescriptorService |
+    descriptorIndex.TsDescriptorCountryAvailability |
+    descriptorIndex.TsDescriptorLinkage |
+    descriptorIndex.TsDescriptorNearVideoOnDemandReference |
+    descriptorIndex.TsDescriptorTimeShiftedService |
+    descriptorIndex.TsDescriptorShortEvent |
+    descriptorIndex.TsDescriptorExtendedEvent |
+    descriptorIndex.TsDescriptorTimeShiftedEvent |
+    descriptorIndex.TsDescriptorComponent |
+    descriptorIndex.TsDescriptorMosaic |
+    descriptorIndex.TsDescriptorStreamIdentifier |
+    descriptorIndex.TsDescriptorCaIdentifier |
+    descriptorIndex.TsDescriptorContent |
+    descriptorIndex.TsDescriptorParentalRating |
+    descriptorIndex.TsDescriptorLocalTimeOffset |
+    descriptorIndex.TsDescriptorPartialTransportStream |
+    descriptorIndex.TsDescriptorDataBroadcastId |
+    descriptorIndex.TsDescriptorMaterialInformation |
+    descriptorIndex.TsDescriptorHybridInformation |
+    descriptorIndex.TsDescriptorHierarchicalTransmission |
+    descriptorIndex.TsDescriptorDigitalCopyControl |
+    descriptorIndex.TsDescriptorNetworkIdentification |
+    descriptorIndex.TsDescriptorPartialTransportStreamTime |
+    descriptorIndex.TsDescriptorAudioComponent |
+    descriptorIndex.TsDescriptorHyperlink |
+    descriptorIndex.TsDescriptorTargetRegion |
+    descriptorIndex.TsDescriptorDataContent |
+    descriptorIndex.TsDescriptorVideoDecodeControl |
+    descriptorIndex.TsDescriptorDownloadContent |
+    descriptorIndex.TsDescriptorCaEmmTs |
+    descriptorIndex.TsDescriptorCaContractInfo |
+    descriptorIndex.TsDescriptorCaService |
+    descriptorIndex.TsDescriptorTsInformation |
+    descriptorIndex.TsDescriptorExtendedBroadcaster |
+    descriptorIndex.TsDescriptorLogoTransmission |
+    descriptorIndex.TsDescriptorBasicLocalEvent |
+    descriptorIndex.TsDescriptorReference |
+    descriptorIndex.TsDescriptorNodeRelation |
+    descriptorIndex.TsDescriptorShortNodeInformation |
+    descriptorIndex.TsDescriptorStcReference |
+    descriptorIndex.TsDescriptorSeries |
+    descriptorIndex.TsDescriptorEventGroup |
+    descriptorIndex.TsDescriptorSiParameter |
+    descriptorIndex.TsDescriptorBroadcasterName |
+    descriptorIndex.TsDescriptorComponentGroup |
+    descriptorIndex.TsDescriptorSiPrimeTs |
+    descriptorIndex.TsDescriptorBoardInformation |
+    descriptorIndex.TsDescriptorLdtLinkage |
+    descriptorIndex.TsDescriptorConnectedTransmission |
+    descriptorIndex.TsDescriptorContentAvailability |
+    descriptorIndex.TsDescriptorServiceGroup |
+    descriptorIndex.TsDescriptorAreaBroadcastingInformation |
+    descriptorIndex.TsDescriptorNetworkDownloadContent |
+    descriptorIndex.TsDescriptorDlProtection |
+    descriptorIndex.TsDescriptorCaStartup |
+    descriptorIndex.TsDescriptorCableMulticarrierTransmissionDeliverySystem |
+    descriptorIndex.TsDescriptorAdvancedCableDeliverySystem |
+    descriptorIndex.TsDescriptorScrambleSystem |
+    descriptorIndex.TsDescriptorAccessControl |
+    descriptorIndex.TsDescriptorCarouselCompatibleComposite |
+    descriptorIndex.TsDescriptorConditionalPlayback |
+    descriptorIndex.TsDescriptorCableTsDivisionSystem |
+    descriptorIndex.TsDescriptorTerrestrialDeliverySystem |
+    descriptorIndex.TsDescriptorPartialReception |
+    descriptorIndex.TsDescriptorEmergencyInformation |
+    descriptorIndex.TsDescriptorDataComponent |
+    descriptorIndex.TsDescriptorSystemManagement
 );
 
 export default class TsDescriptors {
@@ -211,503 +122,503 @@ export default class TsDescriptors {
 
                 case 0x02: {
                     // Video stream
-                    tsDescriptor = new VideoStream(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorVideoStream(buffer);
                     break;
                 }
 
                 case 0x03: {
                     // Audio stream
-                    tsDescriptor = new AudioStream(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorAudioStream(buffer);
 
                     break;
                 }
 
                 case 0x04: {
                     // Hierarchy
-                    tsDescriptor = new Hierarchy(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorHierarchy(buffer);
 
                     break;
                 }
 
                 case 0x05: {
                     // Registration
-                    tsDescriptor = new Registration(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorRegistration(buffer);
 
                     break;
                 }
 
                 case 0x06: {
                     // Data stream alignment
-                    tsDescriptor = new DataStreamAlignment(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorDataStreamAlignment(buffer);
 
                     break;
                 }
 
                 case 0x07: {
                     // Target background grid
-                    tsDescriptor = new TargetBackgroundGrid(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorTargetBackgroundGrid(buffer);
 
                     break;
                 }
 
                 case 0x08: {
                     // Video window
-                    tsDescriptor = new VideoWindow(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorVideoWindow(buffer);
 
                     break;
                 }
 
                 case 0x09: {
                     // Conditional access
-                    tsDescriptor = new ConditionalAccess(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorConditionalAccess(buffer);
 
                     break;
                 }
 
                 case 0x0A: {
                     // ISO 639 language
-                    tsDescriptor = new Iso639Language(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorIso639Language(buffer);
 
                     break;
                 }
 
                 case 0x0B: {
                     // System clock
-                    tsDescriptor = new SystemClock(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorSystemClock(buffer);
 
                     break;
                 }
 
                 case 0x0C: {
                     // Multiplex buffer utilization
-                    tsDescriptor = new MultiplexBufferUtilization(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorMultiplexBufferUtilization(buffer);
 
                     break;
                 }
 
                 case 0x0D: {
                     // Copyright
-                    tsDescriptor = new Copyright(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorCopyright(buffer);
 
                     break;
                 }
 
                 case 0x0F: {
                     // Private data indicator
-                    tsDescriptor = new PrivateDataIndicator(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorPrivateDataIndicator(buffer);
 
                     break;
                 }
 
                 case 0x10: {
                     // Smoothing buffer
-                    tsDescriptor = new SmoothingBuffer(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorSmoothingBuffer(buffer);
 
                     break;
                 }
 
                 case 0x11: {
                     // STD
-                    tsDescriptor = new Std(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorStd(buffer);
 
                     break;
                 }
 
                 case 0x12: {
                     // IBP
-                    tsDescriptor = new Ibp(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorIbp(buffer);
 
                     break;
                 }
 
                 case 0x40: {
                     // Network name
-                    tsDescriptor = new NetworkName(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorNetworkName(buffer);
 
                     break;
                 }
 
                 case 0x41: {
                     // Service list
-                    tsDescriptor = new ServiceList(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorServiceList(buffer);
 
                     break;
                 }
 
                 case 0x42: {
                     // Stuffing
-                    tsDescriptor = new Stuffing(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorStuffing(buffer);
 
                     break;
                 }
 
                 case 0x43: {
                     //Satellite delivery system
-                    tsDescriptor = new SatelliteDeliverySystem(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorSatelliteDeliverySystem(buffer);
 
                     break;
                 }
 
                 case 0x44: {
                     //Cable delivery system
-                    tsDescriptor = new CableDeliverySystem(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorCableDeliverySystem(buffer);
 
                     break;
                 }
 
                 case 0x47: {
                     // Bouquet name
-                    tsDescriptor = new BouquetName(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorBouquetName(buffer);
 
                     break;
                 }
 
                 case 0x48: {
                     // Service
-                    tsDescriptor = new Service(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorService(buffer);
 
                     break;
                 }
 
                 case 0x49: {
                     // Country availability
-                    tsDescriptor = new CountryAvailability(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorCountryAvailability(buffer);
 
                     break;
                 }
 
                 case 0x4A: {
                     // Linkage
-                    tsDescriptor = new Linkage(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorLinkage(buffer);
 
                     break;
                 }
 
                 case 0x4B: {
                     //  Near Video On Demand reference
-                    tsDescriptor = new NearVideoOnDemandReference(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorNearVideoOnDemandReference(buffer);
 
                     break;
                 }
 
                 case 0x4C: {
                     // Time shifted service
-                    tsDescriptor = new TimeShiftedService(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorTimeShiftedService(buffer);
 
                     break;
                 }
 
                 case 0x4D: {
                     // Short event
-                    tsDescriptor = new ShortEvent(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorShortEvent(buffer);
 
                     break;
                 }
 
                 case 0x4E: {
                     // Extended event
-                    tsDescriptor = new ExtendedEvent(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorExtendedEvent(buffer);
 
                     break;
                 }
 
                 case 0x4F: {
                     // Time shifted event
-                    tsDescriptor = new TimeShiftedEvent(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorTimeShiftedEvent(buffer);
 
                     break;
                 }
 
                 case 0x50: {
                     // Component
-                    tsDescriptor = new Component(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorComponent(buffer);
 
                     break;
                 }
 
                 case 0x51: {
                     // Mosaic
-                    tsDescriptor = new Mosaic(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorMosaic(buffer);
 
                     break;
                 }
 
                 case 0x52: {
                     // Stream identifier
-                    tsDescriptor = new StreamIdentifier(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorStreamIdentifier(buffer);
 
                     break;
                 }
 
                 case 0x53: {
                     // CA identifier
-                    tsDescriptor = new CaIdentifier(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorCaIdentifier(buffer);
 
                     break;
                 }
 
                 case 0x54: {
                     // Content
-                    tsDescriptor = new Content(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorContent(buffer);
 
                     break;
                 }
 
                 case 0x55: {
                     // Parental rating
-                    tsDescriptor = new ParentalRating(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorParentalRating(buffer);
 
                     break;
                 }
 
                 case 0x58: {
                     // Local time offset
-                    tsDescriptor = new LocalTimeOffset(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorLocalTimeOffset(buffer);
 
                     break;
                 }
 
                 case 0x63: {
                     // Partial transport stream
-                    tsDescriptor = new PartialTransportStream(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorPartialTransportStream(buffer);
 
                     break;
                 }
 
                 case 0x66: {
                     // Data broadcast id
-                    tsDescriptor = new DataBroadcastId(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorDataBroadcastId(buffer);
 
                     break;
                 }
 
                 case 0x67: {
                     // Material information
-                    tsDescriptor = new MaterialInformation(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorMaterialInformation(buffer);
 
                     break;
                 }
 
                 case 0x68: {
                     // Hybrid information
-                    tsDescriptor = new HybridInformation(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorHybridInformation(buffer);
 
                     break;
                 }
 
                 case 0xC0: {
                     // Hierarchical transmission
-                    tsDescriptor = new HierarchicalTransmission(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorHierarchicalTransmission(buffer);
 
                     break;
                 }
 
                 case 0xC1: {
                     // Digital copy control
-                    tsDescriptor = new DigitalCopyControl(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorDigitalCopyControl(buffer);
 
                     break;
                 }
 
                 case 0xC2: {
                     // Network identification
-                    tsDescriptor = new NetworkIdentification(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorNetworkIdentification(buffer);
 
                     break;
                 }
 
                 case 0xC3: {
                     // Partial transport stream time
-                    tsDescriptor = new PartialTransportStreamTime(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorPartialTransportStreamTime(buffer);
 
                     break;
                 }
 
                 case 0xC4: {
                     // Audio component
-                    tsDescriptor = new AudioComponent(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorAudioComponent(buffer);
 
                     break;
                 }
 
                 case 0xC5: {
                     // Hyperlink
-                    tsDescriptor = new Hyperlink(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorHyperlink(buffer);
 
                     break;
                 }
 
                 case 0xC6: {
                     // Target region
-                    tsDescriptor = new TargetRegion(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorTargetRegion(buffer);
 
                     break;
                 }
 
                 case 0xC7: {
                     // Data content
-                    tsDescriptor = new DataContent(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorDataContent(buffer);
 
                     break;
                 }
 
                 case 0xC8: {
                     // Video decode control
-                    tsDescriptor = new VideoDecodeControl(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorVideoDecodeControl(buffer);
 
                     break;
                 }
 
                 case 0xC9: {
                     // Download content
-                    tsDescriptor = new DownloadContent(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorDownloadContent(buffer);
 
                     break;
                 }
 
                 case 0xCA: {
                     // CA emm ts
-                    tsDescriptor = new CaEmmTs(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorCaEmmTs(buffer);
 
                     break;
                 }
 
                 case 0xCB: {
                     // CA contract info
-                    tsDescriptor = new CaContractInfo(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorCaContractInfo(buffer);
 
                     break;
                 }
 
                 case 0xCC: {
                     // CA service
-                    tsDescriptor = new CaService(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorCaService(buffer);
 
                     break;
                 }
 
                 case 0xCD: {
                     // TS information
-                    tsDescriptor = new TsInformation(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorTsInformation(buffer);
 
                     break;
                 }
 
                 case 0xCE: {
                     // Extended broadcaster
-                    tsDescriptor = new ExtendedBroadcaster(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorExtendedBroadcaster(buffer);
 
                     break;
                 }
 
                 case 0xCF: {
                     // Logo transmission
-                    tsDescriptor = new LogoTransmission(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorLogoTransmission(buffer);
 
                     break;
                 }
 
                 case 0xD0: {
                     // Basic local_event
-                    tsDescriptor = new BasicLocalEvent(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorBasicLocalEvent(buffer);
 
                     break;
                 }
 
                 case 0xD1: {
                     // Reference
-                    tsDescriptor = new Reference(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorReference(buffer);
 
                     break;
                 }
 
                 case 0xD2: {
                     // Node relation
-                    tsDescriptor = new NodeRelation(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorNodeRelation(buffer);
 
                     break;
                 }
 
                 case 0xD3: {
                     // Short node information
-                    tsDescriptor = new ShortNodeInformation(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorShortNodeInformation(buffer);
 
                     break;
                 }
 
                 case 0xD4: {
                     // STC reference
-                    tsDescriptor = new StcReference(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorStcReference(buffer);
 
                     break;
                 }
 
                 case 0xD5: {
                     // Series
-                    tsDescriptor = new Series(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorSeries(buffer);
 
                     break;
                 }
 
                 case 0xD6: {
                     // Event group
-                    tsDescriptor = new EventGroup(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorEventGroup(buffer);
 
                     break;
                 }
 
                 case 0xD7: {
                     // SI parameter
-                    tsDescriptor = new SiParameter(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorSiParameter(buffer);
 
                     break;
                 }
 
                 case 0xD8: {
                     // Broadcaster name
-                    tsDescriptor = new BroadcasterName(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorBroadcasterName(buffer);
 
                     break;
                 }
 
                 case 0xD9: {
                     // Component group
-                    tsDescriptor = new ComponentGroup(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorComponentGroup(buffer);
 
                     break;
                 }
 
                 case 0xDA: {
                     // SI prime_ts
-                    tsDescriptor = new SiPrimeTs(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorSiPrimeTs(buffer);
 
                     break;
                 }
 
                 case 0xDB: {
                     // Board information
-                    tsDescriptor = new BoardInformation(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorBoardInformation(buffer);
 
                     break;
                 }
 
                 case 0xDC: {
                     // LDT linkage
-                    tsDescriptor = new LdtLinkage(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorLdtLinkage(buffer);
 
                     break;
                 }
 
                 case 0xDD: {
                     // Connected transmission
-                    tsDescriptor = new ConnectedTransmission(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorConnectedTransmission(buffer);
 
                     break;
                 }
 
                 case 0xDE: {
                     // Content availability
-                    tsDescriptor = new ContentAvailability(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorContentAvailability(buffer);
 
                     break;
                 }
@@ -720,126 +631,126 @@ export default class TsDescriptors {
 
                 case 0xE0: {
                     // Service group
-                    tsDescriptor = new ServiceGroup(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorServiceGroup(buffer);
 
                     break;
                 }
 
                 case 0xE1: {
                     // Area broadcasting information
-                    tsDescriptor = new AreaBroadcastingInformation(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorAreaBroadcastingInformation(buffer);
 
                     break;
                 }
 
                 case 0xE2: {
                     // Network download content
-                    tsDescriptor = new NetworkDownloadContent(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorNetworkDownloadContent(buffer);
 
                     break;
                 }
 
                 case 0xE3: {
                     // DL protection
-                    tsDescriptor = new DlProtection(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorDlProtection(buffer);
 
                     break;
                 }
 
                 case 0xE4: {
                     // CA startup
-                    tsDescriptor = new CaStartup(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorCaStartup(buffer);
 
                     break;
                 }
 
                 case 0xF3: {
                     // Cable multi-carrier transmission delivery system
-                    tsDescriptor = new CableMulticarrierTransmissionDeliverySystem(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorCableMulticarrierTransmissionDeliverySystem(buffer);
 
                     break;
                 }
 
                 case 0xF4: {
                     // Advanced cable delivery system
-                    tsDescriptor = new AdvancedCableDeliverySystem(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorAdvancedCableDeliverySystem(buffer);
 
                     break;
                 }
 
                 case 0xF5: {
                     // Scramble system
-                    tsDescriptor = new ScrambleSystem(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorScrambleSystem(buffer);
 
                     break;
                 }
 
                 case 0xF6: {
                     // Access control
-                    tsDescriptor = new AccessControl(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorAccessControl(buffer);
 
                     break;
                 }
 
                 case 0xF7: {
                     // Carousel compatible composite
-                    tsDescriptor = new CarouselCompatibleComposite(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorCarouselCompatibleComposite(buffer);
 
                     break;
                 }
 
                 case 0xF8: {
                     // Conditional playback
-                    tsDescriptor = new ConditionalPlayback(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorConditionalPlayback(buffer);
 
                     break;
                 }
 
                 case 0xF9: {
                     // Cable TS division system
-                    tsDescriptor = new CableTsDivisionSystem(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorCableTsDivisionSystem(buffer);
 
                     break;
                 }
 
                 case 0xFA: {
                     // Terrestrial delivery system
-                    tsDescriptor = new TerrestrialDeliverySystem(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorTerrestrialDeliverySystem(buffer);
 
                     break;
                 }
 
                 case 0xFB: {
                     // Partial reception
-                    tsDescriptor = new PartialReception(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorPartialReception(buffer);
 
                     break;
                 }
 
                 case 0xFC: {
                     // Emergency information
-                    tsDescriptor = new EmergencyInformation(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorEmergencyInformation(buffer);
 
                     break;
                 }
 
                 case 0xFD: {
                     // Data component
-                    tsDescriptor = new DataComponent(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorDataComponent(buffer);
 
                     break;
                 }
 
                 case 0xFE: {
                     // System management
-                    tsDescriptor = new SystemManagement(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorSystemManagement(buffer);
 
                     break;
                 }
 
                 default: {
                     // Unknown
-                    tsDescriptor = new Base(buffer);
+                    tsDescriptor = new descriptorIndex.TsDescriptorBase(buffer);
                 }
             }
 
