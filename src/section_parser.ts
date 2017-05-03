@@ -1,45 +1,27 @@
 import TsBase from "./base";
 import TsBuffer from "./buffer";
 import TsPacket from "./packet";
-
-import Base from "./section/base";
-import ProgramAssociation from "./section/program_association";
-import ConditionalAccess from "./section/conditional_access";
-import ProgramMap from "./section/program_map";
-import Dsmcc from "./section/dsmcc";
-import NetworkInformation from "./section/network_information";
-import ServiceDescription from "./section/service_description";
-import BouquetAssociation from "./section/bouquet_association";
-import EventInformation from "./section/event_information";
-import TimeAndDate from "./section/time_and_date";
-import TimeOffset from "./section/time_offset";
-import DiscontinuityInformation from "./section/discontinuity_information";
-import SelectionInformation from "./section/selection_information";
-import Ecm from "./section/ecm";
-import Emm from "./section/emm";
-import EmmMessage from "./section/emm_message";
-import SoftwareDownloadTrigger from "./section/software_download_trigger";
-import CommonData from "./section/common_data";
+import * as sectionIndex from "./section/index";
 
 export type Section = (
-    Base |
-    ProgramAssociation |
-    ConditionalAccess |
-    ProgramMap |
-    Dsmcc |
-    NetworkInformation |
-    ServiceDescription |
-    BouquetAssociation |
-    EventInformation |
-    TimeAndDate |
-    TimeOffset |
-    DiscontinuityInformation |
-    SelectionInformation |
-    Ecm |
-    Emm |
-    EmmMessage |
-    SoftwareDownloadTrigger |
-    CommonData
+    sectionIndex.TsSectionBase |
+    sectionIndex.TsSectionProgramAssociation |
+    sectionIndex.TsSectionConditionalAccess |
+    sectionIndex.TsSectionProgramMap |
+    sectionIndex.TsSectionDsmcc |
+    sectionIndex.TsSectionNetworkInformation |
+    sectionIndex.TsSectionServiceDescription |
+    sectionIndex.TsSectionBouquetAssociation |
+    sectionIndex.TsSectionEventInformation |
+    sectionIndex.TsSectionTimeAndDate |
+    sectionIndex.TsSectionTimeOffset |
+    sectionIndex.TsSectionDiscontinuityInformation |
+    sectionIndex.TsSectionSelectionInformation |
+    sectionIndex.TsSectionEcm |
+    sectionIndex.TsSectionEmm |
+    sectionIndex.TsSectionEmmMessage |
+    sectionIndex.TsSectionSoftwareDownloadTrigger |
+    sectionIndex.TsSectionCommonData
 );
 
 export interface Info {
@@ -53,23 +35,23 @@ export interface Info {
 
 export interface SectionParserEvents {
     on(event: "data", fn: (section: Section) => void): void;
-    on(event: "pat", fn: (section: ProgramAssociation) => void): void;
-    on(event: "cat", fn: (section: ConditionalAccess) => void): void;
-    on(event: "pmt", fn: (section: ProgramMap) => void): void;
-    on(event: "dsmcc", fn: (section: Dsmcc) => void): void;
-    on(event: "nit", fn: (section: Dsmcc) => void): void;
-    on(event: "sdt", fn: (section: ServiceDescription) => void): void;
-    on(event: "bat", fn: (section: BouquetAssociation) => void): void;
-    on(event: "eit", fn: (section: EventInformation) => void): void;
-    on(event: "tdt", fn: (section: TimeAndDate) => void): void;
-    on(event: "tot", fn: (section: TimeOffset) => void): void;
-    on(event: "dit", fn: (section: DiscontinuityInformation) => void): void;
-    on(event: "sit", fn: (section: SelectionInformation) => void): void;
-    on(event: "ecm", fn: (section: Ecm) => void): void;
-    on(event: "emm", fn: (section: Emm) => void): void;
-    on(event: "emmm", fn: (section: EmmMessage) => void): void;
-    on(event: "sdtt", fn: (section: SoftwareDownloadTrigger) => void): void;
-    on(event: "cdt", fn: (section: CommonData) => void): void;
+    on(event: "pat", fn: (section: sectionIndex.TsSectionProgramAssociation) => void): void;
+    on(event: "cat", fn: (section: sectionIndex.TsSectionConditionalAccess) => void): void;
+    on(event: "pmt", fn: (section: sectionIndex.TsSectionProgramMap) => void): void;
+    on(event: "dsmcc", fn: (section: sectionIndex.TsSectionDsmcc) => void): void;
+    on(event: "nit", fn: (section: sectionIndex.TsSectionNetworkInformation) => void): void;
+    on(event: "sdt", fn: (section: sectionIndex.TsSectionServiceDescription) => void): void;
+    on(event: "bat", fn: (section: sectionIndex.TsSectionBouquetAssociation) => void): void;
+    on(event: "eit", fn: (section: sectionIndex.TsSectionEventInformation) => void): void;
+    on(event: "tdt", fn: (section: sectionIndex.TsSectionTimeAndDate) => void): void;
+    on(event: "tot", fn: (section: sectionIndex.TsSectionTimeOffset) => void): void;
+    on(event: "dit", fn: (section: sectionIndex.TsSectionDiscontinuityInformation) => void): void;
+    on(event: "sit", fn: (section: sectionIndex.TsSectionSelectionInformation) => void): void;
+    on(event: "ecm", fn: (section: sectionIndex.TsSectionEcm) => void): void;
+    on(event: "emm", fn: (section: sectionIndex.TsSectionEmm) => void): void;
+    on(event: "emmm", fn: (section: sectionIndex.TsSectionEmmMessage) => void): void;
+    on(event: "sdtt", fn: (section: sectionIndex.TsSectionSoftwareDownloadTrigger) => void): void;
+    on(event: "cdt", fn: (section: sectionIndex.TsSectionCommonData) => void): void;
 }
 
 export default class TsSectionParser extends TsBase implements SectionParserEvents {
@@ -259,7 +241,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
 
             if (tableId === 0x00) {
                 // Program association
-                const tsSection = new ProgramAssociation(section, pid);
+                const tsSection = new sectionIndex.TsSectionProgramAssociation(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -270,7 +252,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0x01) {
                 // Conditional access
-                const tsSection = new ConditionalAccess(section, pid);
+                const tsSection = new sectionIndex.TsSectionConditionalAccess(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -281,7 +263,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0x02) {
                 // Program map
-                const tsSection = new ProgramMap(section, pid);
+                const tsSection = new sectionIndex.TsSectionProgramMap(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -292,7 +274,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId >= 0x3A && tableId <= 0x3F) {
                 // DSM-CC
-                const tsSection = new Dsmcc(section, pid);
+                const tsSection = new sectionIndex.TsSectionDsmcc(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -303,7 +285,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0x40 || tableId === 0x41) {
                 // Network information
-                const tsSection = new NetworkInformation(section, pid);
+                const tsSection = new sectionIndex.TsSectionNetworkInformation(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -314,7 +296,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0x42 || tableId === 0x46) {
                 // Service description
-                const tsSection = new ServiceDescription(section, pid);
+                const tsSection = new sectionIndex.TsSectionServiceDescription(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -325,7 +307,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0x4A) {
                 // Bouquet association
-                const tsSection = new BouquetAssociation(section, pid);
+                const tsSection = new sectionIndex.TsSectionBouquetAssociation(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -336,7 +318,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId >= 0x4E && tableId <= 0x6F) {
                 // Event information
-                const tsSection = new EventInformation(section, pid);
+                const tsSection = new sectionIndex.TsSectionEventInformation(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -347,14 +329,14 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0x70) {
                 // Time and date
-                const tsSection = new TimeAndDate(section, pid);
+                const tsSection = new sectionIndex.TsSectionTimeAndDate(section, pid);
 
                 this.emit("tdt", tsSection);
 
                 this.push(tsSection);
             } else if (tableId === 0x73) {
                 // Time offset
-                const tsSection = new TimeOffset(section, pid);
+                const tsSection = new sectionIndex.TsSectionTimeOffset(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -365,14 +347,14 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0x7E) {
                 // Discontinuity information
-                const tsSection = new DiscontinuityInformation(section, pid);
+                const tsSection = new sectionIndex.TsSectionDiscontinuityInformation(section, pid);
 
                 this.emit("dit", tsSection);
 
                 this.push(tsSection);
             } else if (tableId === 0x7F) {
                 // Selection information
-                const tsSection = new SelectionInformation(section, pid);
+                const tsSection = new sectionIndex.TsSectionSelectionInformation(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -383,7 +365,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0x82) {
                 // ECM
-                const tsSection = new Ecm(section, pid);
+                const tsSection = new sectionIndex.TsSectionEcm(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -394,7 +376,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0x84) {
                 // EMM
-                const tsSection = new Emm(section, pid);
+                const tsSection = new sectionIndex.TsSectionEmm(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -405,7 +387,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0x85) {
                 // EMM message
-                const tsSection = new EmmMessage(section, pid);
+                const tsSection = new sectionIndex.TsSectionEmmMessage(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -416,7 +398,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0xC3) {
                 // Software download trigger
-                const tsSection = new SoftwareDownloadTrigger(section, pid);
+                const tsSection = new sectionIndex.TsSectionSoftwareDownloadTrigger(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -427,7 +409,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else if (tableId === 0xC8) {
                 // Common data
-                const tsSection = new CommonData(section, pid);
+                const tsSection = new sectionIndex.TsSectionCommonData(section, pid);
 
                 if (!tsSection.checkCrc32()) {
                     continue;
@@ -438,7 +420,7 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
                 this.push(tsSection);
             } else {
                 // private section, pipe as TsSectionBase
-                const tsSection = new Base(section, pid);
+                const tsSection = new sectionIndex.TsSectionBase(section, pid);
 
                 this.push(tsSection);
             }
