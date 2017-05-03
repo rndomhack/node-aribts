@@ -1,0 +1,16 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+root = true
+
+[*.{ts,yml,json,sh}]
+charset = utf-8
+end_of_line = crlf
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+
+[*.{yml,json,sh}]
+indent_size = 2
+
+[package.json]
+end_of_line = lf

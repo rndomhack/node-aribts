@@ -1,0 +1,14 @@
+/.vscode
+/node_modules
+/src
+/sample
+/test
+.editorconfig
+.gitignore
+.travis.yml
+gulpfile.js
+tsconfig.json
+tslint.json
+*.m2ts
+*.log
+*.swp

@@ -1,20 +1,52 @@
 {
   "name": "aribts",
-  "version": "2.1.10",
-  "description": "MPEG-2 TS Stream Tool for node",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "MPEG-2 TS Stream Middleware for Node.",
+  "version": "3.0.0-alpha.0",
+  "homepage": "https://github.com/rndomhack/node-aribts",
+  "keywords": [
+    "arib",
+    "m2ts",
+    "dtv"
+  ],
+  "author": "rndomhack",
+  "contributors": [
+    "miyuuki",
+    "kanreisa"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/rndomhack/node-aribts.git"
   },
-  "author": "rndomhack",
+  "bugs": {
+    "url": "https://github.com/rndomhack/node-aribts/issues"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "test": "gulp test",
+    "clean": "gulp clean",
+    "prepublish": "gulp build"
+  },
+  "directories": {
+    "lib": "lib"
+  },
   "dependencies": {
     "crc": "^3.4.0",
     "eventemitter3": "^2.0.0",
     "iconv-lite": "^0.4.13"
   },
-  "license": "MIT"
+  "devDependencies": {
+    "@types/crc": "^3.4.0",
+    "@types/iconv-lite": "0.0.1",
+    "@types/node": "^6.0.71",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-tslint": "^8.0.0",
+    "gulp-typescript": "^3.1.6",
+    "tslint": "^5.1.0",
+    "typescript": "^2.3.2"
+  }
 }

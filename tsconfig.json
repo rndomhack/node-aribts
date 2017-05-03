@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "allowJs": false,
+    "target": "es6",
+    "lib": [
+      "es2015",
+      "es2016.array.include"
+    ],
+    "removeComments": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "declaration": true
+  }
+}

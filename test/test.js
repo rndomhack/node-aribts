@@ -3,7 +3,7 @@
 const fs = require("fs");
 const util = require("util");
 const stream = require("stream");
-const aribts = require("../index");
+const aribts = require("../lib/index");
 
 const startTime = Date.now();
 const size = process.argv[2] === "-" ? 0 : fs.statSync(process.argv[2]).size;

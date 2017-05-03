@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const stream = require("stream");
-const aribts = require("../index");
+const aribts = require("../lib/index");
 
 const size = process.argv[2] === "-" ? 0 : fs.statSync(process.argv[2]).size;
 let bytesRead = 0;

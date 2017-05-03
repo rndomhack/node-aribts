@@ -1,1 +1,6 @@
-node_modules
+/node_modules
+/lib
+/src/**/*.js
+*.m2ts
+*.log
+*.swp
