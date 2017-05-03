@@ -1,77 +1,24 @@
-import Base from "./base";
-export const TsBase = Base;
-
-import ReadableConnector from "./readable_connector";
-export const TsReadableConnector = ReadableConnector;
-
-import WritableConnector from "./writable_connector";
-export const TsWritableConnector = WritableConnector;
-
-import PacketParser from "./packet_parser";
-export const TsPacketParser = PacketParser;
-
-import PacketAnalyzer from "./packet_analyzer";
-export const TsPacketAnalyzer = PacketAnalyzer;
-
-// TsPacketSelector
-// TsPacketConverter
-
-import SectionParser from "./section_parser";
-export const TsSectionParser = SectionParser;
-
-import SectionAnalyzer from "./section_analyzer";
-export const TsSectionAnalyzer = SectionAnalyzer;
-
-import SectionUpdater from "./section_updater";
-export const TsSectionUpdater = SectionUpdater;
-
-// TsEventManager
-// TsCommonDataManager
-
-import Crc32 from "./crc32";
-export const TsCrc32 = Crc32;
-
-import Buffer from "./buffer";
-export const TsBuffer = Buffer;
-
-import Reader from "./reader";
-export const TsReader = Reader;
-
-import Writer from "./writer";
-export const TsWriter = Writer;
-
-import Char from "./char";
-export const TsChar = Char;
-
-// TsDate
-// TsLogo
-
-import Packet from "./packet";
-export const TsPacket = Packet;
-
-// TsEvent
-
-import Util from "./util";
-export const TsUtil = Util;
-
-import Descriptors from "./descriptors";
-export const TsDescriptors = Descriptors;
-
-import CarouselDescriptors from "./carousel_descriptors";
-export const TsCarouselDescriptors = CarouselDescriptors;
-
-/*
-module.exports = {
-
-    TsPacketSelector: require("./packet_selector"),
-    TsPacketConverter: require("./packet_converter"),
-
-    TsEventManager: require("./event_manager"),
-    TsCommonDataManager: require("./common_data_manager"),
-
-    TsDate: require("./date"),
-    TsLogo: require("./logo"),
-
-    TsEvent: require("./event"),
-};
-*/
+export { default as TsBase } from "./base";
+export { default as TsReadableConnector } from "./readable_connector";
+export { default as TsWritableConnector } from "./writable_connector";
+export { default as TsPacketParser } from "./packet_parser";
+export { default as TsPacketAnalyzer } from "./packet_analyzer";
+// export { default as TsPacketSelector } from "./packet_selector";
+// export { default as TsPacketConverter } from "./packet_converter";
+export { default as TsSectionParser } from "./section_parser";
+export { default as TsSectionAnalyzer } from "./section_analyzer";
+export { default as TsSectionUpdater } from "./section_updater";
+// export { default as TsEventManager } from "./event_manager";
+// export { default as TsCommonDataManager } from "./common_data_manager";
+export { default as TsCrc32 } from "./crc32";
+export { default as TsBuffer } from "./buffer";
+export { default as TsReader } from "./reader";
+export { default as TsWriter } from "./writer";
+export { default as TsChar } from "./char";
+export { default as TsDate } from "./date";
+// export { default as TsLogo } from "./logo";
+export { default as TsPacket } from "./packet";
+// export { default as TsEvent } from "./event";
+export { default as TsUtil } from "./util";
+export { default as TsDescriptors } from "./descriptors";
+export { default as TsCarouselDescriptors } from "./carousel_descriptors";
