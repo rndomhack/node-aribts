@@ -1,17 +1,12 @@
-import Type from "./carousel_descriptor/type";
-import Name from "./carousel_descriptor/name";
-import Info from "./carousel_descriptor/info";
-import ModuleLink from "./carousel_descriptor/module_link";
-import Crc32 from "./carousel_descriptor/crc32";
-import Base from "./carousel_descriptor/base";
+import * as index from "./carousel_descriptor/index";
 
 export type TsCarouselDescriptor = (
-    Type |
-    Name |
-    Info |
-    ModuleLink |
-    Crc32 |
-    Base
+    index.TsCarouselDescriptorType |
+    index.TsCarouselDescriptorName |
+    index.TsCarouselDescriptorInfo |
+    index.TsCarouselDescriptorModuleLink |
+    index.TsCarouselDescriptorCrc32 |
+    index.TsCarouselDescriptorBase
 );
 
 export default class TsCarouselDescriptors {
@@ -36,42 +31,42 @@ export default class TsCarouselDescriptors {
             switch (descriptorTag) {
                 case 0x01: {
                     // Type
-                    tsCarouselDescriptor = new Type(buffer);
+                    tsCarouselDescriptor = new index.TsCarouselDescriptorType(buffer);
 
                     break;
                 }
 
                 case 0x02: {
                     // Name
-                    tsCarouselDescriptor = new Name(buffer);
+                    tsCarouselDescriptor = new index.TsCarouselDescriptorName(buffer);
 
                     break;
                 }
 
                 case 0x03: {
                     // Info
-                    tsCarouselDescriptor = new Info(buffer);
+                    tsCarouselDescriptor = new index.TsCarouselDescriptorInfo(buffer);
 
                     break;
                 }
 
                 case 0x04: {
                     // Module link
-                    tsCarouselDescriptor = new ModuleLink(buffer);
+                    tsCarouselDescriptor = new index.TsCarouselDescriptorModuleLink(buffer);
 
                     break;
                 }
 
                 case 0x05: {
                     // CRC32
-                    tsCarouselDescriptor = new Crc32(buffer);
+                    tsCarouselDescriptor = new index.TsCarouselDescriptorCrc32(buffer);
 
                     break;
                 }
 
                 default: {
                     // Unknown
-                    tsCarouselDescriptor = new Base(buffer);
+                    tsCarouselDescriptor = new index.TsCarouselDescriptorBase(buffer);
                 }
             }
 
