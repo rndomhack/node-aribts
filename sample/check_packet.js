@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const stream = require("stream");
-const aribts = require("../index");
+const aribts = require("../lib/index");
 
 if (process.argv.length < 3) {
     console.error("Usage: node check_drop.js /path/to/file.ts");

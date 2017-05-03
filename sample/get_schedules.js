@@ -1,7 +1,7 @@
 "use strict";
 
 const fs = require("fs");
-const aribts = require("../index");
+const aribts = require("../lib/index");
 
 if (process.argv.length < 3) {
     console.error("Usage: node get_schedules.js /path/to/file.ts");

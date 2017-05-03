@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const stream = require("stream");
-const aribts = require("../index");
+const aribts = require("../lib/index");
 
 if (process.argv.length < 5) {
     console.error("Usage: node select_packet.js /path/to/infile.ts /path/to/outfile.ts programNumber1 programNumber2 ...");

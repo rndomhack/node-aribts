@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const aribts = require("../index");
+const aribts = require("../lib/index");
 
 if (process.argv.length < 4) {
     console.error("Usage: node get_logo.js /path/to/file.ts /path/to/folder");
