@@ -5,7 +5,7 @@ const stream = require("stream");
 const aribts = require("../lib/index");
 
 if (process.argv.length < 3) {
-    console.error("Usage: node check_drop.js /path/to/file.ts");
+    console.error("Usage: node check_packet.js /path/to/file.ts");
     process.exit(1);
 }
 
