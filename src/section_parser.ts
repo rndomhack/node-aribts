@@ -33,28 +33,30 @@ export interface Info {
     };
 }
 
-export interface SectionParserEvents {
-    on(event: "data", fn: (section: Section) => void): void;
-    on(event: "pat", fn: (section: sectionIndex.TsSectionProgramAssociation) => void): void;
-    on(event: "cat", fn: (section: sectionIndex.TsSectionConditionalAccess) => void): void;
-    on(event: "pmt", fn: (section: sectionIndex.TsSectionProgramMap) => void): void;
-    on(event: "dsmcc", fn: (section: sectionIndex.TsSectionDsmcc) => void): void;
-    on(event: "nit", fn: (section: sectionIndex.TsSectionNetworkInformation) => void): void;
-    on(event: "sdt", fn: (section: sectionIndex.TsSectionServiceDescription) => void): void;
-    on(event: "bat", fn: (section: sectionIndex.TsSectionBouquetAssociation) => void): void;
-    on(event: "eit", fn: (section: sectionIndex.TsSectionEventInformation) => void): void;
-    on(event: "tdt", fn: (section: sectionIndex.TsSectionTimeAndDate) => void): void;
-    on(event: "tot", fn: (section: sectionIndex.TsSectionTimeOffset) => void): void;
-    on(event: "dit", fn: (section: sectionIndex.TsSectionDiscontinuityInformation) => void): void;
-    on(event: "sit", fn: (section: sectionIndex.TsSectionSelectionInformation) => void): void;
-    on(event: "ecm", fn: (section: sectionIndex.TsSectionEcm) => void): void;
-    on(event: "emm", fn: (section: sectionIndex.TsSectionEmm) => void): void;
-    on(event: "emmm", fn: (section: sectionIndex.TsSectionEmmMessage) => void): void;
-    on(event: "sdtt", fn: (section: sectionIndex.TsSectionSoftwareDownloadTrigger) => void): void;
-    on(event: "cdt", fn: (section: sectionIndex.TsSectionCommonData) => void): void;
+export interface TsSectionParser extends TsSectionParserInternal {
+    new(): this;
+    on(event: "data", fn: (section: Section) => void): this;
+    on(event: "pat", fn: (section: sectionIndex.TsSectionProgramAssociation) => void): this;
+    on(event: "cat", fn: (section: sectionIndex.TsSectionConditionalAccess) => void): this;
+    on(event: "pmt", fn: (section: sectionIndex.TsSectionProgramMap) => void): this;
+    on(event: "dsmcc", fn: (section: sectionIndex.TsSectionDsmcc) => void): this;
+    on(event: "nit", fn: (section: sectionIndex.TsSectionNetworkInformation) => void): this;
+    on(event: "sdt", fn: (section: sectionIndex.TsSectionServiceDescription) => void): this;
+    on(event: "bat", fn: (section: sectionIndex.TsSectionBouquetAssociation) => void): this;
+    on(event: "eit", fn: (section: sectionIndex.TsSectionEventInformation) => void): this;
+    on(event: "tdt", fn: (section: sectionIndex.TsSectionTimeAndDate) => void): this;
+    on(event: "tot", fn: (section: sectionIndex.TsSectionTimeOffset) => void): this;
+    on(event: "dit", fn: (section: sectionIndex.TsSectionDiscontinuityInformation) => void): this;
+    on(event: "sit", fn: (section: sectionIndex.TsSectionSelectionInformation) => void): this;
+    on(event: "ecm", fn: (section: sectionIndex.TsSectionEcm) => void): this;
+    on(event: "emm", fn: (section: sectionIndex.TsSectionEmm) => void): this;
+    on(event: "emmm", fn: (section: sectionIndex.TsSectionEmmMessage) => void): this;
+    on(event: "sdtt", fn: (section: sectionIndex.TsSectionSoftwareDownloadTrigger) => void): this;
+    on(event: "cdt", fn: (section: sectionIndex.TsSectionCommonData) => void): this;
+    on(event: string, fn: Function): this;
 }
 
-export default class TsSectionParser extends TsBase implements SectionParserEvents {
+export class TsSectionParserInternal extends TsBase {
     _info: Info;
 
     constructor() {
@@ -429,3 +431,6 @@ export default class TsSectionParser extends TsBase implements SectionParserEven
         callback();
     }
 }
+
+const TsSectionParser = TsSectionParserInternal as any as TsSectionParser;
+export default TsSectionParser;
