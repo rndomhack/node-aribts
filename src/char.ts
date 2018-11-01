@@ -196,7 +196,7 @@ export default class TsChar {
 
             case 0x95:
                 // MACRO
-                while (this.buffer[this.position] !== 0x4F) {
+                while (this.position < this.buffer.length && this.buffer[this.position] !== 0x4F) {
                     this.position++;
                 }
 
